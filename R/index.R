@@ -81,7 +81,8 @@ theme_index <- function(syllabus_index = load_syllabus(),
       <th></th>
     </tr>
     </thead>
-  ')
+    '
+  )
 
   paste(c(header, row_groups, "</table>"), collapse = "\n")
 }

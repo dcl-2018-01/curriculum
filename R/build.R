@@ -1,7 +1,6 @@
 cur_week <- 10
 themes <- c("Explore", "Wrangle", "Program", "Model", "Communicate", "Workflow")
 
-
 build <- function() {
   message("Building units ----------------------------------")
   build_units()
@@ -109,7 +108,10 @@ build_overview <- function() {
     needs = raw_units %>% map("needs")
   )
 
-  needs <- units %>% select(name, needs) %>% unnest(needs)
+  needs <- units %>%
+    select(name, needs) %>%
+    filter(needs %>% map_lgl(~ !is_empty(.))) %>%
+    unnest(needs)
 
   needs_graph <- igraph::graph_from_data_frame(needs, vertices = units)
   set.seed(1014)
