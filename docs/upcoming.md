@@ -37,7 +37,7 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="5"></td>
-  <td colspan="3"><a class="workflow" href="code-style.html">Code style</a></td>
+  <td colspan="3"><a class="workflow" href="code-style.html">Code style*</a></td>
 </tr>
 <tr>
 <td></td>

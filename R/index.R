@@ -1,7 +1,11 @@
-unit_row <- function(unit, title, theme, week = "", n = 2) {
+unit_row <- function(unit, title, updated, theme, week = "", n = 2) {
   ncol <- length(themes) + n
   start_col <- match(theme, tolower(themes))
   end_col <- start_col + n
+
+  if (identical(updated, "2018-01")) {
+    title <- paste0(title, "*")
+  }
 
   week <- if (week == "") "<td></td>" else glue(  "<td id='week-{week}'>{week}</td>")
   left <- if (start_col > 1)   glue('  <td colspan="{start_col - 1}"></td>')
@@ -28,6 +32,7 @@ week_tbody <- function(week_num,
   units_df <- tibble(
     unit = names(units),
     title = units %>% map_chr("title"),
+    updated = units %>% map_chr("updated", .default = NA),
     theme = units %>% map_chr("theme"),
     week = c(week_num, rep("", length(units) - 1))
   )
