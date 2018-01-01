@@ -1,10 +1,10 @@
 - units: # week 1
   - setup
-  - code-style
-  - documentation
   - data-basics
   - vis-basics
   - manip-basics
+  - documentation
+  - code-style
   - rmarkdown-basics
 
 - units: # week 2
