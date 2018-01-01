@@ -41,6 +41,12 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
+  <td colspan="4"></td>
+  <td colspan="3"><a class="communicate" href="rmarkdown-basics.html">R Markdown basics</a></td>
+  <td colspan="1"></td>
+</tr>
+<tr>
+<td></td>
   <td colspan="3"><a class="explore" href="vis-basics.html">Visualisation basics (1)</a></td>
   <td colspan="5"></td>
 </tr>
@@ -59,12 +65,6 @@ title: Theme index
 <td></td>
   <td colspan="5"></td>
   <td colspan="3"><a class="workflow" href="code-style.html">Code style*</a></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="4"></td>
-  <td colspan="3"><a class="communicate" href="rmarkdown-basics.html">R Markdown basics</a></td>
-  <td colspan="1"></td>
 </tr>
 </tbody>
 <tbody>
