@@ -10,6 +10,13 @@ title: Setup
 Ensure that you have all the tools you need for this class. You should
 have done this before the first day.
 
+Note the two important R functions:
+
+* `install.packages()` downloads a package from the internet and
+  saves on your computer.
+
+* `library()` loads an installed package and makes it available for use.
+
 ## Readings
 
   * [Prerequisites](http://r4ds.had.co.nz/introduction.html#prerequisites) [r4ds-1.4]
