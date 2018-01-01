@@ -11,18 +11,18 @@ read_yaml <- function(path) {
 }
 
 load_units <- function() {
-  paths <- dir("units", pattern = "\\.yml$", full.name = TRUE)
+  paths <- dir(here::here("units"), pattern = "\\.yml$", full.names = TRUE)
   names(paths) <- tools::file_path_sans_ext(basename(paths))
 
   map(paths, read_yaml)
 }
 
 load_syllabus <- function() {
-  read_yaml("syllabus.yml")
+  read_yaml(here::here("syllabus.yml"))
 }
 
 load_supplements <- function() {
-  x <- read_yaml("supplements.yml")
+  x <- read_yaml(here::here("supplements.yml"))
   set_names(x, map_chr(x, "slug"))
 }
 

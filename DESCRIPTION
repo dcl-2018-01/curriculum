@@ -7,14 +7,15 @@ Authors@R: c(
     person("RStudio", role = "cph")
   )
 Depends: 
-  tidyverse,
-  rvest,
-  stringr,
   glue,
   ggraph,
-  yaml
+  yaml,
+  tidyverse
 Imports:
   digest
+Suggests:
+  rvest,
+  here
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

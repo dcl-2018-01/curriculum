@@ -1,34 +1,18 @@
-cur_week <- 10
-themes <- c("Explore", "Wrangle", "Program", "Model", "Communicate", "Workflow")
-
-build <- function() {
-  message("Building units ----------------------------------")
-  build_units()
-
-  message("Building storyboard -----------------------------")
-  build_storyboard()
-
-  message("Building overview graph -------------------------")
-  build_overview()
-
-  message("=================================================")
-}
-
 clean <- function() {
-  old <- dir("docs", pattern = "^[^_]", full.names = TRUE)
-  old <- setdiff(old, "docs/style.css")
+  old <- dir(here::here("docs"), pattern = "^[^_]", full.names = TRUE)
+  old <- setdiff(old, here::here("docs/style.css"))
   unlink(old, recursive = TRUE)
 }
 
 build_units <- function() {
   # Update rmd files
-  units_rmd <- dir("units", pattern = "\\.Rmd$", full.names = TRUE)
+  units_rmd <- dir(here::here("units"), pattern = "\\.Rmd$", full.names = TRUE)
   units_rmd %>%
     walk(render_rmd)
 
   # Copy Rmarkdown directories
-  notes <- dir("units/", pattern = "(_files|\\.md|diagrams)$", full.names = TRUE)
-  notes %>% walk(file.copy, to = "docs", recursive = TRUE)
+  notes <- dir(here::here("units/"), pattern = "(_files|\\.md|diagrams)$", full.names = TRUE)
+  notes %>% walk(file.copy, to = here::here("docs"), recursive = TRUE)
 
   syllabus <- load_syllabus()
   units <- load_units()
@@ -36,25 +20,24 @@ build_units <- function() {
 
   syllabus[1:cur_week] %>%
     theme_index(units, reverse = TRUE) %>%
-    write_if_different("docs/index.md")
+    write_if_different(here::here("docs/index.md"))
 
   syllabus[1:cur_week] %>%
     theme_index(units) %>%
-    write_if_different("docs/chrono.md")
+    write_if_different(here::here("docs/chrono.md"))
 
   syllabus %>%
     theme_index(units) %>%
-    write_if_different("docs/upcoming.md")
+    write_if_different(here::here("docs/upcoming.md"))
 
   supplements %>%
     supplements_index() %>%
-    write_if_different("docs/supplements.md")
+    write_if_different(here::here("docs/supplements.md"))
 
-  out_path <- paste0("docs/", names(units), ".md")
+  out_path <- here::here(paste0("docs/", names(units), ".md"))
   units %>%
     map2_chr(names(units), md_unit, supp_index = supplements, unit_index = units) %>%
     walk2(out_path, write_if_different)
-
 
 }
 
@@ -95,7 +78,7 @@ build_storyboard <- function() {
     select(book_id, title, everything()) %>%
     spread(week, units) %>%
     knitr::kable() %>%
-    cat(file = "storyboard.md", sep = "\n")
+    cat(file = here::here("storyboard.md"), sep = "\n")
 }
 
 
@@ -129,5 +112,5 @@ build_overview <- function() {
     theme_void() +
     scale_fill_brewer(palette = "Set2")
 
-  ggsave("overview.png", width = 12, height = 8, dpi = 96)
+  ggsave(here::here("overview.png"), width = 12, height = 8, dpi = 96)
 }
