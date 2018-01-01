@@ -25,6 +25,7 @@ render_rmd <- function(rmd_path) {
     theme = meta$theme,
     needs = meta$needs,
     readings = meta$readings,
+    updated = meta$updated,
     desc = md
   )
 

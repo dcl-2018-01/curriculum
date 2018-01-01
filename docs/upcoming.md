@@ -47,7 +47,7 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="manip-basics.html">Manipulation basics</a></td>
+  <td colspan="3"><a class="wrangle" href="manip-basics.html">Manipulation basics*</a></td>
   <td colspan="4"></td>
 </tr>
 <tr>
