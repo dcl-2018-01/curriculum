@@ -12,12 +12,17 @@ Code style is simultaneously incredibly important and utterly trivial.
 It'slikepunctuation: sureyoucanmakedowithoutit, but proper punctuation
 can sure make things easier to read!
 
+Install styler with `install.packages("styler")` and make sure you can
+locate the RStudio addin command for restyling selected code. This will
+make it very easy to apply the tidyverse style guide automatically.
+
 ## Readings
 
   * [Style guide](http://style.tidyverse.org).
-    The specific style you follow is not as important as picking a consistent
-    style and sticking to it. When you're working with others, it's a really
-    good idea to share a common style so that everyone can easily read and
-    write the code. In this class, we'll use the tidyverse style guide.
+    Read Chapters 1-3. The specific style you follow is not as important as
+    picking a consistent style and sticking to it. When you're working with
+    others, it's a really good idea to share a common style so that everyone
+    can easily read and write the code. In this class, we'll use the tidyverse
+    style guide.
 
 
