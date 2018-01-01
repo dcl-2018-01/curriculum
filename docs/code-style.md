@@ -19,7 +19,7 @@ make it very easy to apply the tidyverse style guide automatically.
 ## Readings
 
   * [Style guide](http://style.tidyverse.org).
-    Read Chapters 1-3. The specific style you follow is not as important as
+    Read Chapters 1-4. The specific style you follow is not as important as
     picking a consistent style and sticking to it. When you're working with
     others, it's a really good idea to share a common style so that everyone
     can easily read and write the code. In this class, we'll use the tidyverse

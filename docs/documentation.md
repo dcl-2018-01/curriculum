@@ -19,26 +19,22 @@ There are three commands in R that you should be familiar with:
 
 * `?function_name` opens the help for `function_name()`. If you know
   the name of the function, this will tell you how it works and how you
-  can control its operation.
+  can control its operation. (`?` also works for built-in datasets).
+
+  If you ever wonder which package a function comes from, you can
+  use `?` to figure it out - just look at the top-left of the help page;
+  the package name is surrounded in `{}`.
 
 * `browseVignettes(package = "package_name")` lists all the "vignettes"
-  (long form documentation) available for a package. Many packages include
-  an introductory vignette that give you the lay of the land.
+  available for a package. Vignettes are longer documents that describe
+  how multiple functions work. Many packages include an introductory vignette
+  that give you the lay of the land: these are useful to read before
+  you know the name of the function you need.
 
 * `help(package = "package_name")` lists all the functions available in
   a package with links to their help pages. This mostly useful for packages
   that don't have a vignette.
 
-There are also some useful websites that you'll learn about below.
-
-## Readings
-
-  * [tidyverse.org](http://tidyverse.org).
-    This is a work in progress, but lists websites for individual packages
-    within the tidyverse.
-
-  * [rdocumentation.org](https://www.rdocumentation.org).
-    This website contains the documentation for the vast majority of R packages
-    with a searchable index.
-
-
+Alternatively, you can use <https://www.rdocumentation.org>; this provides
+exactly access to the same documentation pages and vignettes, but in
+an attractive website.

@@ -36,16 +36,6 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
-  <td colspan="5"></td>
-  <td colspan="3"><a class="workflow" href="code-style.html">Code style*</a></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="5"></td>
-  <td colspan="3"><a class="workflow" href="documentation.html">Documentation</a></td>
-</tr>
-<tr>
-<td></td>
   <td colspan="3"><a class="explore" href="data-basics.html">Data basics</a></td>
   <td colspan="5"></td>
 </tr>
@@ -59,6 +49,16 @@ title: Theme index
   <td colspan="1"></td>
   <td colspan="3"><a class="wrangle" href="manip-basics.html">Manipulation basics</a></td>
   <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="5"></td>
+  <td colspan="3"><a class="workflow" href="documentation.html">Documentation*</a></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="5"></td>
+  <td colspan="3"><a class="workflow" href="code-style.html">Code style*</a></td>
 </tr>
 <tr>
 <td></td>
