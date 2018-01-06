@@ -37,38 +37,55 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 > 
 > — The 9th circle of [The R Inferno][r-inferno]
   
-If you do get to help from others, strive to create a __reprex__, a minimal reproducible example. There are three things you need to include to make your example reproducible: required packages, data, and code.
 
-1.  **Packages** should be loaded at the top of the script, so it's easy to
-    see which ones the example needs. This is a good time to check that you're
-    using the latest version of each package; it's possible you've discovered
-    a bug that's been fixed since you installed the package. For packages
-    in the tidyverse, the easiest way to check is to run `tidyverse_update()`.
+If you need help getting unstuck, the first step is to create a __reprex__, or reproducible example. The goal of a reprex is to package your problematic code in such a way that other people can run it and feel your pain. Then, hopefully, they can provide a solution and put you out of your misery.
 
-1.  The easiest way to include **data** in a question is to use `dput()` to 
-    generate the R code to recreate it. For example, to recreate the `mtcars` 
-    dataset in R, I'd perform the following steps:
+There are two parts to creating a reprex:
+
+* First, you need to make your code reproducible. This means that you need
+  to capture everything, i.e., include any `library()` calls and create all necessary objects. The easiest way to make sure you've done this is to use the [reprex package](/help#reprex-pkg).
   
-    1. Run `dput(mtcars)` in R
-    2. Copy the output
-    3. In my reproducible script, type `mtcars <- ` then paste.
-    
-    Try and find the smallest subset of your data that still reveals
-    the problem.
+* Second, you need to make it minimal. Strip away everything that is not directly related to your problem. This usually involves creating a much smaller and simpler R object than the one you're facing in real life or even using built-in data.
+  
+That sounds like a lot of work!  And it can be, but it has a great payoff:
 
-1.  Spend a little bit of time ensuring that your **code** is easy for others to
-    read:
+* 80% of the time creating an excellent reprex reveals the source of your problem. It's amazing how often the process of writing up a self-contained and minimal example allows you to answer your own question.
 
-    * Make sure you've used spaces and your variable names are concise, yet
-      informative.
-    
-    * Use comments to indicate where your problem lies.
-    
-    * Do your best to remove everything that is not related to the problem.  
-      The shorter your code is, the easier it is to understand, and the 
-      easier it is to fix.
+* The other 20% of time you will have captured the essence of your problem in
+  a way that is easy for others to play with. This substantially improves
+  your chances of getting help!
 
-In the process of preparing your own reprex, you'll often find that you answer your own question. So it is a useful exercise even if you aren't ready to call in the experts yet. The process of stripping your problem down to its bare essence often reveals where the root issue lies. 
+### The reprex package {#reprex-pkg}
+
+When creating a reprex by hand, it's easy to accidentally miss something that means your code can't be run on someone else's computer. Avoid this problem by using the [reprex package](http://reprex.tidyverse.org). It's installed as part of the tidyverse *(will be true soon)* or you can install it by itself. Go ahead and load it.
+
+```R
+## pick one:
+##   install.packages("tidyverse") <-- will work soon
+##   install.packages("reprex")    <-- works today
+
+library(reprex)
+```
+
+Write a bit of code and copy it to the clipboard:
+
+```R
+(y <- 1:4)
+mean(y)
+```
+
+Enter `reprex()` in the R Console. In RStudio, you'll see a preview of your rendered reprex.
+
+```R
+(y <- 1:4)
+#> [1] 1 2 3 4
+mean(y)
+#> [1] 2.5
+```
+
+It is now ready and waiting on your clipboard, so you can paste it into, say, a GitHub issue. In RStudio, you can access reprex from the [addins menu](https://rstudio.github.io/rstudioaddins/), which makes it even easier to point out your code and select the output format.
+
+If your code is not self-contained, running `reprex()` results in an error. It may feel like tough love, but this way you can get your story straight in private. The reprex format also strongly encourages you to find the minimal dataset necessary to show your problem. Creating an effective reprex is a learned skill and the immediate feedback from reprex makes this very concrete.
 
 ### More resources on asking good questions
 

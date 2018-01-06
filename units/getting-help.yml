@@ -17,28 +17,40 @@ desc: "Jenny Bryan and Hadley Wickham\n\n## Help yourself\n\n![](https://imgs.xk
   concise and user-friendly gives you the best hope of at least\n> one of those strangers
   diverting their attention away from their life\n> towards your problem.\n> \n> —
   The 9th circle of [The R\n> Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/)\n\nIf
-  you do get to help from others, strive to create a **reprex**, a\nminimal reproducible
-  example. There are three things you need to include\nto make your example reproducible:
-  required packages, data, and code.\n\n1.  **Packages** should be loaded at the top
-  of the script, so it’s easy\n    to see which ones the example needs. This is a
-  good time to check\n    that you’re using the latest version of each package; it’s
-  possible\n    you’ve discovered a bug that’s been fixed since you installed the\n
-  \   package. For packages in the tidyverse, the easiest way to check is\n    to
-  run `tidyverse_update()`.\n\n2.  The easiest way to include **data** in a question
-  is to use `dput()`\n    to generate the R code to recreate it. For example, to recreate
-  the\n    `mtcars` dataset in R, I’d perform the following steps:\n    \n    1.  Run
-  `dput(mtcars)` in R\n    2.  Copy the output\n    3.  In my reproducible script,
-  type `mtcars <-` then paste.\n    \n    Try and find the smallest subset of your
-  data that still reveals the\n    problem.\n\n3.  Spend a little bit of time ensuring
-  that your **code** is easy for\n    others to read:\n    \n      - Make sure you’ve
-  used spaces and your variable names are\n        concise, yet informative.\n    \n
-  \     - Use comments to indicate where your problem lies.\n    \n      - Do your
-  best to remove everything that is not related to the\n        problem.  \n        The
-  shorter your code is, the easier it is to understand, and\n        the easier it
-  is to fix.\n\nIn the process of preparing your own reprex, you’ll often find that
-  you\nanswer your own question. So it is a useful exercise even if you aren’t\nready
-  to call in the experts yet. The process of stripping your problem\ndown to its bare
-  essence often reveals where the root issue lies.\n\n### More resources on asking
+  you need help getting unstuck, the first step is to create a\n**reprex**, or reproducible
+  example. The goal of a reprex is to package\nyour problematic code in such a way
+  that other people can run it and\nfeel your pain. Then, hopefully, they can provide
+  a solution and put you\nout of your misery.\n\nThere are two parts to creating a
+  reprex:\n\n  - First, you need to make your code reproducible. This means that you\n
+  \   need to capture everything, i.e., include any `library()` calls and\n    create
+  all necessary objects. The easiest way to make sure you’ve\n    done this is to
+  use the [reprex package](/help#reprex-pkg).\n\n  - Second, you need to make it minimal.
+  Strip away everything that is\n    not directly related to your problem. This usually
+  involves creating\n    a much smaller and simpler R object than the one you’re facing
+  in\n    real life or even using built-in data.\n\nThat sounds like a lot of work\\!
+  And it can be, but it has a great\npayoff:\n\n  - 80% of the time creating an excellent
+  reprex reveals the source of\n    your problem. It’s amazing how often the process
+  of writing up a\n    self-contained and minimal example allows you to answer your
+  own\n    question.\n\n  - The other 20% of time you will have captured the essence
+  of your\n    problem in a way that is easy for others to play with. This\n    substantially
+  improves your chances of getting help\\!\n\n### The reprex package\n\nWhen creating
+  a reprex by hand, it’s easy to accidentally miss something\nthat means your code
+  can’t be run on someone else’s computer. Avoid this\nproblem by using the [reprex
+  package](http://reprex.tidyverse.org). It’s\ninstalled as part of the tidyverse
+  *(will be true soon)* or you can\ninstall it by itself. Go ahead and load it.\n\n```
+  r\n## pick one:\n##   install.packages(\"tidyverse\") <-- will work soon\n##   install.packages(\"reprex\")
+  \   <-- works today\n\nlibrary(reprex)\n```\n\nWrite a bit of code and copy it to
+  the clipboard:\n\n``` r\n(y <- 1:4)\nmean(y)\n```\n\nEnter `reprex()` in the R Console.
+  In RStudio, you’ll see a preview of\nyour rendered reprex.\n\n``` r\n(y <- 1:4)\n#>
+  [1] 1 2 3 4\nmean(y)\n#> [1] 2.5\n```\n\nIt is now ready and waiting on your clipboard,
+  so you can paste it into,\nsay, a GitHub issue. In RStudio, you can access reprex
+  from the [addins\nmenu](https://rstudio.github.io/rstudioaddins/), which makes it
+  even\neasier to point out your code and select the output format.\n\nIf your code
+  is not self-contained, running `reprex()` results in an\nerror. It may feel like
+  tough love, but this way you can get your story\nstraight in private. The reprex
+  format also strongly encourages you to\nfind the minimal dataset necessary to show
+  your problem. Creating an\neffective reprex is a learned skill and the immediate
+  feedback from\nreprex makes this very concrete.\n\n### More resources on asking
   good questions\n\n  - [How To Ask Questions The Smart\n    Way](http://www.catb.org/~esr/faqs/smart-questions.html),
   Eric\n    Raymond and Rick Moen. You’ll need a slightly thick skin, but they\n    speak
   truth.\n\n  - [How to Ask for Programming\n    Help](http://codingkilledthecat.wordpress.com/2012/06/26/how-to-ask-for-programming-help/)\n\n
