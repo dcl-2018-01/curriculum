@@ -1,58 +1,47 @@
 title: Getting help
 theme: workflow
 needs: documentation
-desc: |
-  Jenny Bryan and Hadley Wickham
-
-  Help yourself
-  -------------
-
-  ![](https://imgs.xkcd.com/comics/tech_support_cheat_sheet.png)
-
-  -   Carefully read the error message. Often it won't help, but sometimes there are hints that will help you get started.
-
-  -   If you encounter an error message you don't understand, strip anything highly specific (like your object or variable names), surround it with quotes and **google** it!
-
-      (If the error message isn't in English, run `Sys.setenv(LANGUAGE = "en")` and re-run the code; you're more likely to find help for English error messages.)
-
-  -   Search [stackoverflow](http://stackoverflow.com) and include the `[r]` tag. Or the `[ggplot2]` tag. Or the `[dplyr]` tag. You get the idea.
-
-  Get help from others
-  --------------------
-
-  > If someone has the wit and knowledge to answer your question, they probably have other things they would like to do. Making your message clear, concise and user-friendly gives you the best hope of at least one of those strangers diverting their attention away from their life towards your problem.
-  >
-  > — The 9th circle of [The R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/)
-
-  If you do get to help from others, strive to create a **reprex**, a minimal reproducible example. There are three things you need to include to make your example reproducible: required packages, data, and code.
-
-  1.  **Packages** should be loaded at the top of the script, so it's easy to see which ones the example needs. This is a good time to check that you're using the latest version of each package; it's possible you've discovered a bug that's been fixed since you installed the package. For packages in the tidyverse, the easiest way to check is to run `tidyverse_update()`.
-
-  2.  The easiest way to include **data** in a question is to use `dput()` to generate the R code to recreate it. For example, to recreate the `mtcars` dataset in R, I'd perform the following steps:
-
-      1.  Run `dput(mtcars)` in R
-      2.  Copy the output
-      3.  In my reproducible script, type `mtcars <-` then paste.
-
-      Try and find the smallest subset of your data that still reveals the problem.
-
-  3.  Spend a little bit of time ensuring that your **code** is easy for others to read:
-
-      -   Make sure you've used spaces and your variable names are concise, yet informative.
-
-      -   Use comments to indicate where your problem lies.
-
-      -   Do your best to remove everything that is not related to the problem.
-          The shorter your code is, the easier it is to understand, and the easier it is to fix.
-
-  In the process of preparing your own reprex, you'll often find that you answer your own question. So it is a useful exercise even if you aren't ready to call in the experts yet. The process of stripping your problem down to its bare essence often reveals where the root issue lies.
-
-  ### More resources on asking good questions
-
-  -   [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html), Eric Raymond and Rick Moen. You'll need a slightly thick skin, but they speak truth.
-
-  -   [How to Ask for Programming Help](http://codingkilledthecat.wordpress.com/2012/06/26/how-to-ask-for-programming-help/)
-
-  -   [How to ask](https://codereview.stackexchange.com/help/how-to-ask), Stack Exchange's
-
-  -   [What have you tried?](http://mattgemmell.com/what-have-you-tried/), Matt Gemmell.
+readings: ~
+updated: ~
+desc: "Jenny Bryan and Hadley Wickham\n\n## Help yourself\n\n![](https://imgs.xkcd.com/comics/tech_support_cheat_sheet.png)\n\n
+  \ - Carefully read the error message. Often it won’t help, but sometimes\n    there
+  are hints that will help you get started.\n\n  - If you encounter an error message
+  you don’t understand, strip\n    anything highly specific (like your object or variable
+  names),\n    surround it with quotes and **google** it\\!\n    \n    (If the error
+  message isn’t in English, run `Sys.setenv(LANGUAGE =\n    \"en\")` and re-run the
+  code; you’re more likely to find help for\n    English error messages.)\n\n  - Search
+  [stackoverflow](http://stackoverflow.com) and include the\n    `[r]` tag. Or the
+  `[ggplot2]` tag. Or the `[dplyr]` tag. You get the\n    idea.\n\n## Get help from
+  others\n\n> If someone has the wit and knowledge to answer your question, they\n>
+  probably have other things they would like to do. Making your message\n> clear,
+  concise and user-friendly gives you the best hope of at least\n> one of those strangers
+  diverting their attention away from their life\n> towards your problem.\n> \n> —
+  The 9th circle of [The R\n> Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/)\n\nIf
+  you do get to help from others, strive to create a **reprex**, a\nminimal reproducible
+  example. There are three things you need to include\nto make your example reproducible:
+  required packages, data, and code.\n\n1.  **Packages** should be loaded at the top
+  of the script, so it’s easy\n    to see which ones the example needs. This is a
+  good time to check\n    that you’re using the latest version of each package; it’s
+  possible\n    you’ve discovered a bug that’s been fixed since you installed the\n
+  \   package. For packages in the tidyverse, the easiest way to check is\n    to
+  run `tidyverse_update()`.\n\n2.  The easiest way to include **data** in a question
+  is to use `dput()`\n    to generate the R code to recreate it. For example, to recreate
+  the\n    `mtcars` dataset in R, I’d perform the following steps:\n    \n    1.  Run
+  `dput(mtcars)` in R\n    2.  Copy the output\n    3.  In my reproducible script,
+  type `mtcars <-` then paste.\n    \n    Try and find the smallest subset of your
+  data that still reveals the\n    problem.\n\n3.  Spend a little bit of time ensuring
+  that your **code** is easy for\n    others to read:\n    \n      - Make sure you’ve
+  used spaces and your variable names are\n        concise, yet informative.\n    \n
+  \     - Use comments to indicate where your problem lies.\n    \n      - Do your
+  best to remove everything that is not related to the\n        problem.  \n        The
+  shorter your code is, the easier it is to understand, and\n        the easier it
+  is to fix.\n\nIn the process of preparing your own reprex, you’ll often find that
+  you\nanswer your own question. So it is a useful exercise even if you aren’t\nready
+  to call in the experts yet. The process of stripping your problem\ndown to its bare
+  essence often reveals where the root issue lies.\n\n### More resources on asking
+  good questions\n\n  - [How To Ask Questions The Smart\n    Way](http://www.catb.org/~esr/faqs/smart-questions.html),
+  Eric\n    Raymond and Rick Moen. You’ll need a slightly thick skin, but they\n    speak
+  truth.\n\n  - [How to Ask for Programming\n    Help](http://codingkilledthecat.wordpress.com/2012/06/26/how-to-ask-for-programming-help/)\n\n
+  \ - [How to ask](https://codereview.stackexchange.com/help/how-to-ask),\n    Stack
+  Exchange’s\n\n  - [What have you tried?](http://mattgemmell.com/what-have-you-tried/),\n
+  \   Matt Gemmell.\n"

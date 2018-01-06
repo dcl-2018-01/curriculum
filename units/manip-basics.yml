@@ -3,10 +3,10 @@ theme: wrangle
 needs: data-basics
 readings: ~
 updated: 2018-01
-desc: "\n``` r\nlibrary(tidyverse)\n#> ── Attaching packages ──────────────────────────────
+desc: "\n``` r\nlibrary(tidyverse)\n#> ── Attaching packages ─────────────────────────────────────────────────────
   tidyverse 1.2.0.9000 ──\n#> ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.4     \n#> ✔
   tibble  1.4.1          ✔ dplyr   0.7.4     \n#> ✔ tidyr   0.7.2          ✔ stringr
-  1.2.0     \n#> ✔ readr   1.1.1          ✔ forcats 0.2.0\n#> ── Conflicts ──────────────────────────────────────
+  1.2.0     \n#> ✔ readr   1.1.1          ✔ forcats 0.2.0\n#> ── Conflicts ─────────────────────────────────────────────────────────────
   tidyverse_conflicts() ──\n#> ✖ dplyr::filter() masks stats::filter()\n#> ✖ dplyr::lag()
   \   masks stats::lag()\nlibrary(nycflights13)\n```\n\n## dplyr basics\n\nIn this
   reading you will going to learn about three important dplyr\nfunctions that give
