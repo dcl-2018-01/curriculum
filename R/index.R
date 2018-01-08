@@ -3,9 +3,9 @@ unit_row <- function(unit, title, updated, theme, week = "", n = 2) {
   start_col <- match(theme, tolower(themes))
   end_col <- start_col + n
 
-  if (identical(updated, "2018-01")) {
-    title <- paste0(title, "*")
-  }
+  # if (identical(updated, "2018-01")) {
+  #   title <- paste0(title, "*")
+  # }
 
   week <- if (week == "") "<td></td>" else glue(  "<td id='week-{week}'>{week}</td>")
   left <- if (start_col > 1)   glue('  <td colspan="{start_col - 1}"></td>')

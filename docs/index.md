@@ -53,18 +53,18 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="manip-basics.html">Manipulation basics*</a></td>
+  <td colspan="3"><a class="wrangle" href="manip-basics.html">Manipulation basics</a></td>
   <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
   <td colspan="5"></td>
-  <td colspan="3"><a class="workflow" href="documentation.html">Documentation*</a></td>
+  <td colspan="3"><a class="workflow" href="documentation.html">Documentation</a></td>
 </tr>
 <tr>
 <td></td>
   <td colspan="5"></td>
-  <td colspan="3"><a class="workflow" href="code-style.html">Code style*</a></td>
+  <td colspan="3"><a class="workflow" href="code-style.html">Code style</a></td>
 </tr>
 </tbody>
 <tbody>
