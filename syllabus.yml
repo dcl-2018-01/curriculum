@@ -11,13 +11,13 @@
   - vis-basics-2
   - vis-labelling
   - manip-one-table
-  - eda-1d
-  - data-structure-basics
   - tidy-data
   - getting-help
   - vis-calls
 
 - units: # week 3
+  - eda-1d
+  - data-structure-basics
   - missing-values
   - eda-2d
   - parse-basics

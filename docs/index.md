@@ -67,4 +67,39 @@ title: Theme index
   <td colspan="1"></td>
 </tr>
 </tbody>
+<tbody>
+<tr>
+<td id='week-2'>2</td>
+  <td colspan="3"><a class="explore" href="vis-basics-2.html">Visualisation basics (2)</a></td>
+  <td colspan="5"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"></td>
+  <td colspan="3"><a class="communicate" href="vis-labelling.html">Labels</a></td>
+  <td colspan="1"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="manip-one-table.html">Other single table verbs</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="tidy-data.html">Tidy data</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="5"></td>
+  <td colspan="3"><a class="workflow" href="getting-help.html">Getting help</a></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="3"><a class="explore" href="vis-calls.html">ggplot2 calls</a></td>
+  <td colspan="5"></td>
+</tr>
+</tbody>
 </table>

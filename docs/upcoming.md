@@ -87,17 +87,6 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
-  <td colspan="3"><a class="explore" href="eda-1d.html">Exploratory data analysis (1D)</a></td>
-  <td colspan="5"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="2"></td>
-  <td colspan="3"><a class="program" href="data-structure-basics.html">Data structure basics</a></td>
-  <td colspan="3"></td>
-</tr>
-<tr>
-<td></td>
   <td colspan="1"></td>
   <td colspan="3"><a class="wrangle" href="tidy-data.html">Tidy data</a></td>
   <td colspan="4"></td>
@@ -116,6 +105,17 @@ title: Theme index
 <tbody>
 <tr>
 <td id='week-3'>3</td>
+  <td colspan="3"><a class="explore" href="eda-1d.html">Exploratory data analysis (1D)</a></td>
+  <td colspan="5"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="2"></td>
+  <td colspan="3"><a class="program" href="data-structure-basics.html">Data structure basics</a></td>
+  <td colspan="3"></td>
+</tr>
+<tr>
+<td></td>
   <td colspan="1"></td>
   <td colspan="3"><a class="wrangle" href="missing-values.html">Missing values</a></td>
   <td colspan="4"></td>
