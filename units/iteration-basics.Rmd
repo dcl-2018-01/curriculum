@@ -1,0 +1,170 @@
+---
+unit_title: Iteration basics
+theme: program
+needs: [data-structure-basics]
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+## Introduction
+
+One of the biggest advantage to using a programming langauge rather than a point-and-click GUI is that you can automate repetitive tasks. In this lesson, you'll the learn basics of the purrr package in order to repeat a task across multiple elements of a list (a new data structure which you'll learn about shortly). 
+
+We'll use two packages: purrr, which contains functions for iteration, and repurrssive, which contains some interesting data sets.
+
+```{r}
+library(purrr)
+library(repurrrsive)
+```
+
+This lesson was adapted from "[An introduction to purrr](https://github.com/cwickham/purrr-tutorial)" by Charlotte Wickham.
+
+## Star Wars
+
+To illustrate purrr we're going to use `repurrrsive::starwars`, which contains data about characters in the Star Wars movies. The data is contained in a data structure that we haven't talk about yet: a list. Lists are a step up in complexity from atomic vectors, because lists can contain other lists. This makes them suitable for representing hierarchical or tree-like structures. 
+
+```{r}
+typeof(sw_people)
+length(sw_people)
+```
+
+The best to interactively explore a complex list is with `View()` in RStudio. 
+
+```{r, echo = FALSE}
+knitr::include_graphics("diagrams/view-sw_people.png")
+```
+
+Failing that, it's often possible to extract out the first element with `x[[1]]`, then use `str()` on that:
+
+```{r}
+luke <- sw_people[[1]]
+str(luke)
+```
+
+In this case, each component of `sw_people` is a list containing information about each character.
+
+### `map()` basics
+
+There are lots of questions that are easy to answer if we have one character, but harder if we have many characters. For example, image we want to find out how many starships Luke has been on:
+
+```{r}
+luke[["starships"]]
+length(luke[["starships"]])
+```
+
+It's easy to do this for a few individuals:
+
+```{r}
+leia <- sw_people[[5]]
+length(leia[["starships"]])
+```
+
+But what if you want to do it for all 87 people? Repeating the pattern using copy and paste will be both tedious and error prone!
+
+```{r}
+length(sw_people[[1]][["starships"]])
+length(sw_people[[2]][["starships"]])
+length(sw_people[[3]][["starships"]])
+# ...
+length(sw_people[[87]][["starships"]])
+```
+
+Instead, we're going to use `purrr::map()`. `map()` has two key arguments: 
+
+* `.x`: an atomic vector, list, or data frame to do something to
+* `.f`: the thing to do each element
+
+There are many ways to specify `.f` which you'll learn about later. For now, we're going to focus on using it with __formulas__, which are created with `~`. Formulas allow us to extract out a common recipe from repeated code. 
+
+Creating a recipe is easy: take a single solution and put a `~` in front of it, and replace the specific element with a pronoun, `.x`. For example, to find the number of starships for a person, we'd do:
+
+```{r}
+~ length(.x$starships)
+```
+
+This is a formula. A formula doesn't do anything; it just captures your intent. 
+
+To do some computation with this formula, we need to apply it to the `sw_people` list with with map. The output is quite long so I save it to a variable and then only look at the first few entries (using `head()`):
+
+```{r}
+ships <- map(sw_people, ~ length(.x$starships))
+head(ships)
+```
+
+This is much easier than copy and pasting!
+
+## Output type
+
+`map()` always returns a list. This is the most general function because there's nothing that can't go into a list. But often you want something simpler, so you might you use a more specific function:
+
+* `map_lgl()` makes a logical vector
+* `map_int()` makes an integer vector
+* `map_dbl()` makes a double vector
+* `map_chr()` makes a character vector
+
+```{r}
+map_chr(sw_people, ~ .x[["name"]])
+map_lgl(sw_people, ~ .x[["gender"]] == "male")
+map_int(sw_people, ~ length(.x$starships))
+map_chr(sw_people, ~ .x[["hair_color"]])
+```
+
+
+With the `map_` functions you either get the type of vector that you asked for, or you get an error. Sometimes this reveals surprising information about your data:
+
+```{r, error = TRUE}
+map_dbl(sw_people, ~ .x[["mass"]])
+```
+Why not?
+
+```{r}
+sw_people[[1]][["mass"]]
+```
+
+`mass` has been recorded as a string! So lets use `map_chr()` to get it.
+
+```{r}
+map_chr(sw_people, ~ .x[["mass"]])
+```
+
+We probably want that as a number so we can use `read::parse_number()` tell it that in this variable missing values are recorded as "unknown":
+
+```{r}
+sw_people %>% 
+  map_chr(~ .x[["mass"]]) %>% 
+  readr::parse_number(na = "unknown")
+```
+
+## Short cuts
+
+So far we've used a formula recipe for the second argument of `map()`. But it can be lots of other things.  For example, it can also be a string or integer:
+
+* `map(.x, .f = "some_name")` is equivalent to `map(.x, ~ .x[["some_name"]])`
+* `map(.x, .f = some_name)` is equivalent to `map(.x, ~ .x[[some_name]])`
+
+That lets us simplify some exressions:
+
+```{r}
+# BEFORE: 
+# map_chr(sw_people, ~ .x[["mass"]])
+
+# AFTER
+map_chr(sw_people, "mass")
+```
+
+`.f` can also be a function: `map(.x, .f = some_function, ...)` is equivalent to `map(.x, .f = ~ some_function(.x, ...))`
+
+```{r}
+# BEFORE
+# map_int(sw_people, ~ length(.x$starships))
+
+sw_people %>%
+  map("starships") %>%
+  map_int(length)
+```
+
+Generally, I think the "after" form is a little better. It's usually easier to solve a problem by taking one small step at a time. Check your results, then only proceed to the next step if they're proceed. Each step becomes one entry in a pipeline. This might lead to a long pipeline; if you're worried about that, you can rewrite it for clarity and concision __after__ you have got it working.
+
+
