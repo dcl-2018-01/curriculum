@@ -62,6 +62,8 @@ x[-1]
 x[x > 5]
 ```
 
+The names of these functions are `[` and `[[` but are used like `x[y]` (pronounced "x square-bracket y") and `x[[y]]` (pronounced "x double-square-bracket y"). You can get help on them with `` ?`[` `` and `` ?`[[` ``.
+
 ### Augmented vectors
 
 Augmented vectors are atomic vectors with additional metadata. There are four important augmented vectors:

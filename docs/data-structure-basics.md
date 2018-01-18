@@ -6,7 +6,7 @@ title: Data structure basics
 
 # Data structure basics <small class='program'>[program]</small>
 <small>(Builds on: [Manipulation basics](manip-basics.md))</small>  
-<small>(Leads to: [Date/time basics](datetime-basics.md), [Function basics](function-basics.md), [Iteration basics](iteration-basics.md), [Lists](lists.md), [Parsing basics](parse-basics.md), [Atomic vectors](vectors.md))</small>
+<small>(Leads to: [Date/time basics](datetime-basics.md), [Function basics](function-basics.md), [Lists](lists.md), [Parsing basics](parse-basics.md), [Iteration basics](purrr-map.md), [Atomic vectors](vectors.md))</small>
 
 
 It’s helpful to know a little bit about how data structures are
@@ -74,6 +74,11 @@ x[-1]
 x[x > 5]
 #> [1] 5.1 5.3
 ```
+
+The names of these functions are `[` and `[[` but are used like `x[y]`
+(pronounced “x square-bracket y”) and `x[[y]]` (pronounced “x
+double-square-bracket y”). You can get help on them with ``?`[` `` and
+``?`[[` ``.
 
 ### Augmented vectors
 

@@ -2,7 +2,7 @@
 title: Iteration basics
 ---
 
-<!-- Generated automatically from iteration-basics.yml. Do not edit by hand -->
+<!-- Generated automatically from purrr-map.yml. Do not edit by hand -->
 
 # Iteration basics <small class='program'>[program]</small>
 <small>(Builds on: [Data structure basics](data-structure-basics.md))</small>
@@ -13,11 +13,8 @@ title: Iteration basics
 One of the biggest advantage to using a programming langauge rather than
 a point-and-click GUI is that you can automate repetitive tasks. In this
 lesson, you’ll the learn basics of the purrr package in order to repeat
-a task across multiple elements of a list (a new data structure which
-you’ll learn about shortly).
-
-We’ll use two packages: purrr, which contains functions for iteration,
-and repurrssive, which contains some interesting data sets.
+a task across multiple elements of a vector. We’ll also use the
+repurrrsive package, which contains some interesting data sets.
 
 ``` r
 library(purrr)
@@ -74,8 +71,8 @@ str(luke)
 #>  $ url       : chr "http://swapi.co/api/people/1/"
 ```
 
-In this case, each component of `sw_people` is a list containing
-information about each character.
+In this case, each element of the `sw_people` list is another list
+containing data about a character.
 
 ### `map()` basics
 
@@ -98,8 +95,8 @@ length(leia[["starships"]])
 #> [1] 0
 ```
 
-But what if you want to do it for all 87 people? Repeating the pattern
-using copy and paste will be both tedious and error prone\!
+But what if you want to do it for all 87 people? Using copy and paste
+will be both tedious and error prone.
 
 ``` r
 length(sw_people[[1]][["starships"]])
@@ -113,33 +110,32 @@ length(sw_people[[87]][["starships"]])
 #> [1] 3
 ```
 
-Instead, we’re going to use `purrr::map()`. `map()` has two key
-arguments:
+Instead, we’re going to learn a new approach using `purrr::map()`.
+`map()` has two key arguments:
 
-  - `.x`: an atomic vector, list, or data frame to do something to
-  - `.f`: the thing to do each element
+  - `.x`: an atomic vector, list, or data frame to do manipulate.
+  - `.f`: the thing to do each element.
 
 There are many ways to specify `.f` which you’ll learn about later. For
 now, we’re going to focus on using it with **formulas**, which are
-created with `~`. Formulas allow us to extract out a common recipe from
-repeated code.
+created with `~`. Formulas allow us to extract out a common pattern, or
+recipe, from repeated code.
 
 Creating a recipe is easy: take a single solution and put a `~` in front
-of it, and replace the specific element with a pronoun, `.x`. For
-example, to find the number of starships for a person, we’d do:
+of it, and replace the part the varies over elements with `.x`, a
+pronoun. For example, to find the number of starships for a person, we’d
+do:
 
 ``` r
 ~ length(.x$starships)
 #> ~length(.x$starships)
-#> <environment: 0x7fdc1c107a78>
+#> <environment: 0x7fb6506d9a78>
 ```
 
 This is a formula. A formula doesn’t do anything; it just captures your
-intent.
-
-To do some computation with this formula, we need to apply it to the
-`sw_people` list with with map. The output is quite long so I save it to
-a variable and then only look at the first few entries (using `head()`):
+intent. Here `.x` is a pronoun like “it”, `map()` will replace `.x` with
+each element of the list in turn. To use formula, we need to apply it to
+the `sw_people` list with `map()`:
 
 ``` r
 ships <- map(sw_people, ~ length(.x$starships))
@@ -163,20 +159,27 @@ head(ships)
 #> [1] 0
 ```
 
+Note that the output is quite long so I save it to a variable and then
+only look at the first few entries (using the helpful `head()`
+function).
+
 This is much easier than copy and pasting\!
 
 ## Output type
 
 `map()` always returns a list. This is the most general function because
-there’s nothing that can’t go into a list. But often you want something
-simpler, so you might you use a more specific function:
+any R data structure can be stored inside a list. But often you want
+something simpler, so you’ll use one of the map variants:
 
-  - `map_lgl()` makes a logical vector
-  - `map_int()` makes an integer vector
-  - `map_dbl()` makes a double vector
-  - `map_chr()` makes a character vector
+  - `map_lgl()` makes a logical vector.
+  - `map_int()` makes an integer vector.
+  - `map_dbl()` makes a double vector.
+  - `map_chr()` makes a character vector.
 
-<!-- end list -->
+Here are a few examples: try and figure out what they do. If you don’t
+understand, translate back from the generic formula to a specific
+example. For example, you could translate `~ .x[["name"]]` back to
+`luke[["name"]]`.
 
 ``` r
 map_chr(sw_people, ~ .x[["name"]])
@@ -262,8 +265,8 @@ map_chr(sw_people, ~ .x[["hair_color"]])
 #> [85] "none"          "unknown"       "brown"
 ```
 
-With the `map_` functions you either get the type of vector that you
-asked for, or you get an error. Sometimes this reveals surprising
+The `map_` functions always either give you the type of vector that you
+asked for, or they throw an error. Sometimes this reveals surprising
 information about your data:
 
 ``` r
@@ -271,10 +274,11 @@ map_dbl(sw_people, ~ .x[["mass"]])
 #> Error: Can't coerce element 1 from a character to a double
 ```
 
-Why not?
+Why not? Whenever you get an error, a good strategy is to go back to the
+basics and look at a single value:
 
 ``` r
-sw_people[[1]][["mass"]]
+luke[["mass"]]
 #> [1] "77"
 ```
 
@@ -298,8 +302,9 @@ map_chr(sw_people, ~ .x[["mass"]])
 #> [85] "unknown" "unknown" "45"
 ```
 
-We probably want that as a number so we can use `read::parse_number()`
-tell it that in this variable missing values are recorded as “unknown”:
+We probably want that as a number so we can use `read::parse_number()`,
+and tell it that in this variable missing values are recorded as
+“unknown”:
 
 ``` r
 sw_people %>% 
@@ -316,7 +321,7 @@ sw_people %>%
 #> [81]   80.0     NA     NA     NA     NA     NA   45.0
 ```
 
-## Short cuts
+## Shortcuts
 
 So far we’ve used a formula recipe for the second argument of `map()`.
 But it can be lots of other things. For example, it can also be a string

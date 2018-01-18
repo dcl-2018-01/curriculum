@@ -6,9 +6,8 @@ updated: ~
 desc: "\n## Introduction\n\nOne of the biggest advantage to using a programming langauge
   rather than\na point-and-click GUI is that you can automate repetitive tasks. In
   this\nlesson, you’ll the learn basics of the purrr package in order to repeat\na
-  task across multiple elements of a list (a new data structure which\nyou’ll learn
-  about shortly).\n\nWe’ll use two packages: purrr, which contains functions for iteration,\nand
-  repurrssive, which contains some interesting data sets.\n\n``` r\nlibrary(purrr)\nlibrary(repurrrsive)\n```\n\nThis
+  task across multiple elements of a vector. We’ll also use the\nrepurrrsive package,
+  which contains some interesting data sets.\n\n``` r\nlibrary(purrr)\nlibrary(repurrrsive)\n```\n\nThis
   lesson was adapted from “[An introduction to\npurrr](https://github.com/cwickham/purrr-tutorial)”
   by Charlotte\nWickham.\n\n## Star Wars\n\nTo illustrate purrr we’re going to use
   `repurrrsive::starwars`, which\ncontains data about characters in the Star Wars
@@ -30,45 +29,49 @@ desc: "\n## Introduction\n\nOne of the biggest advantage to using a programming 
   \ $ starships : chr [1:2] \"http://swapi.co/api/starships/12/\" \"http://swapi.co/api/starships/22/\"\n#>
   \ $ created   : chr \"2014-12-09T13:50:51.644000Z\"\n#>  $ edited    : chr \"2014-12-20T21:17:56.891000Z\"\n#>
   \ $ url       : chr \"http://swapi.co/api/people/1/\"\n```\n\nIn this case, each
-  component of `sw_people` is a list containing\ninformation about each character.\n\n###
+  element of the `sw_people` list is another list\ncontaining data about a character.\n\n###
   `map()` basics\n\nThere are lots of questions that are easy to answer if we have
   one\ncharacter, but harder if we have many characters. For example, image we\nwant
   to find out how many starships Luke has been on:\n\n``` r\nluke[[\"starships\"]]\n#>
   [1] \"http://swapi.co/api/starships/12/\" \"http://swapi.co/api/starships/22/\"\nlength(luke[[\"starships\"]])\n#>
   [1] 2\n```\n\nIt’s easy to do this for a few individuals:\n\n``` r\nleia <- sw_people[[5]]\nlength(leia[[\"starships\"]])\n#>
-  [1] 0\n```\n\nBut what if you want to do it for all 87 people? Repeating the pattern\nusing
-  copy and paste will be both tedious and error prone\\!\n\n``` r\nlength(sw_people[[1]][[\"starships\"]])\n#>
+  [1] 0\n```\n\nBut what if you want to do it for all 87 people? Using copy and paste\nwill
+  be both tedious and error prone.\n\n``` r\nlength(sw_people[[1]][[\"starships\"]])\n#>
   [1] 2\nlength(sw_people[[2]][[\"starships\"]])\n#> [1] 0\nlength(sw_people[[3]][[\"starships\"]])\n#>
   [1] 0\n# ...\nlength(sw_people[[87]][[\"starships\"]])\n#> [1] 3\n```\n\nInstead,
-  we’re going to use `purrr::map()`. `map()` has two key\narguments:\n\n  - `.x`:
-  an atomic vector, list, or data frame to do something to\n  - `.f`: the thing to
-  do each element\n\nThere are many ways to specify `.f` which you’ll learn about
-  later. For\nnow, we’re going to focus on using it with **formulas**, which are\ncreated
-  with `~`. Formulas allow us to extract out a common recipe from\nrepeated code.\n\nCreating
-  a recipe is easy: take a single solution and put a `~` in front\nof it, and replace
-  the specific element with a pronoun, `.x`. For\nexample, to find the number of starships
-  for a person, we’d do:\n\n``` r\n~ length(.x$starships)\n#> ~length(.x$starships)\n#>
-  <environment: 0x7fdc1c107a78>\n```\n\nThis is a formula. A formula doesn’t do anything;
-  it just captures your\nintent.\n\nTo do some computation with this formula, we need
-  to apply it to the\n`sw_people` list with with map. The output is quite long so
-  I save it to\na variable and then only look at the first few entries (using `head()`):\n\n```
-  r\nships <- map(sw_people, ~ length(.x$starships))\nhead(ships)\n#> [[1]]\n#> [1]
-  2\n#> \n#> [[2]]\n#> [1] 0\n#> \n#> [[3]]\n#> [1] 0\n#> \n#> [[4]]\n#> [1] 1\n#>
-  \n#> [[5]]\n#> [1] 0\n#> \n#> [[6]]\n#> [1] 0\n```\n\nThis is much easier than copy
-  and pasting\\!\n\n## Output type\n\n`map()` always returns a list. This is the most
-  general function because\nthere’s nothing that can’t go into a list. But often you
-  want something\nsimpler, so you might you use a more specific function:\n\n  - `map_lgl()`
-  makes a logical vector\n  - `map_int()` makes an integer vector\n  - `map_dbl()`
-  makes a double vector\n  - `map_chr()` makes a character vector\n\n<!-- end list
-  -->\n\n``` r\nmap_chr(sw_people, ~ .x[[\"name\"]])\n#>  [1] \"Luke Skywalker\"        \"C-3PO\"
-  \               \n#>  [3] \"R2-D2\"                 \"Darth Vader\"          \n#>
-  \ [5] \"Leia Organa\"           \"Owen Lars\"            \n#>  [7] \"Beru Whitesun
-  lars\"    \"R5-D4\"                \n#>  [9] \"Biggs Darklighter\"     \"Obi-Wan
-  Kenobi\"       \n#> [11] \"Anakin Skywalker\"      \"Wilhuff Tarkin\"       \n#>
-  [13] \"Chewbacca\"             \"Han Solo\"             \n#> [15] \"Greedo\"                \"Jabba
-  Desilijic Tiure\"\n#> [17] \"Wedge Antilles\"        \"Jek Tono Porkins\"     \n#>
-  [19] \"Yoda\"                  \"Palpatine\"            \n#> [21] \"Boba Fett\"
-  \            \"IG-88\"                \n#> [23] \"Bossk\"                 \"Lando
+  we’re going to learn a new approach using `purrr::map()`.\n`map()` has two key arguments:\n\n
+  \ - `.x`: an atomic vector, list, or data frame to do manipulate.\n  - `.f`: the
+  thing to do each element.\n\nThere are many ways to specify `.f` which you’ll learn
+  about later. For\nnow, we’re going to focus on using it with **formulas**, which
+  are\ncreated with `~`. Formulas allow us to extract out a common pattern, or\nrecipe,
+  from repeated code.\n\nCreating a recipe is easy: take a single solution and put
+  a `~` in front\nof it, and replace the part the varies over elements with `.x`,
+  a\npronoun. For example, to find the number of starships for a person, we’d\ndo:\n\n```
+  r\n~ length(.x$starships)\n#> ~length(.x$starships)\n#> <environment: 0x7fb6506d9a78>\n```\n\nThis
+  is a formula. A formula doesn’t do anything; it just captures your\nintent. Here
+  `.x` is a pronoun like “it”, `map()` will replace `.x` with\neach element of the
+  list in turn. To use formula, we need to apply it to\nthe `sw_people` list with
+  `map()`:\n\n``` r\nships <- map(sw_people, ~ length(.x$starships))\nhead(ships)\n#>
+  [[1]]\n#> [1] 2\n#> \n#> [[2]]\n#> [1] 0\n#> \n#> [[3]]\n#> [1] 0\n#> \n#> [[4]]\n#>
+  [1] 1\n#> \n#> [[5]]\n#> [1] 0\n#> \n#> [[6]]\n#> [1] 0\n```\n\nNote that the output
+  is quite long so I save it to a variable and then\nonly look at the first few entries
+  (using the helpful `head()`\nfunction).\n\nThis is much easier than copy and pasting\\!\n\n##
+  Output type\n\n`map()` always returns a list. This is the most general function
+  because\nany R data structure can be stored inside a list. But often you want\nsomething
+  simpler, so you’ll use one of the map variants:\n\n  - `map_lgl()` makes a logical
+  vector.\n  - `map_int()` makes an integer vector.\n  - `map_dbl()` makes a double
+  vector.\n  - `map_chr()` makes a character vector.\n\nHere are a few examples: try
+  and figure out what they do. If you don’t\nunderstand, translate back from the generic
+  formula to a specific\nexample. For example, you could translate `~ .x[[\"name\"]]`
+  back to\n`luke[[\"name\"]]`.\n\n``` r\nmap_chr(sw_people, ~ .x[[\"name\"]])\n#>
+  \ [1] \"Luke Skywalker\"        \"C-3PO\"                \n#>  [3] \"R2-D2\"                 \"Darth
+  Vader\"          \n#>  [5] \"Leia Organa\"           \"Owen Lars\"            \n#>
+  \ [7] \"Beru Whitesun lars\"    \"R5-D4\"                \n#>  [9] \"Biggs Darklighter\"
+  \    \"Obi-Wan Kenobi\"       \n#> [11] \"Anakin Skywalker\"      \"Wilhuff Tarkin\"
+  \      \n#> [13] \"Chewbacca\"             \"Han Solo\"             \n#> [15] \"Greedo\"
+  \               \"Jabba Desilijic Tiure\"\n#> [17] \"Wedge Antilles\"        \"Jek
+  Tono Porkins\"     \n#> [19] \"Yoda\"                  \"Palpatine\"            \n#>
+  [21] \"Boba Fett\"             \"IG-88\"                \n#> [23] \"Bossk\"                 \"Lando
   Calrissian\"     \n#> [25] \"Lobot\"                 \"Ackbar\"               \n#>
   [27] \"Mon Mothma\"            \"Arvel Crynyd\"         \n#> [29] \"Wicket Systri
   Warrick\" \"Nien Nunb\"            \n#> [31] \"Qui-Gon Jinn\"          \"Nute Gunray\"
@@ -125,43 +128,44 @@ desc: "\n## Introduction\n\nOne of the biggest advantage to using a programming 
   \         \"none\"          \"none\"         \n#> [77] \"none\"          \"brown\"
   \        \"brown\"         \"none\"         \n#> [81] \"none\"          \"black\"
   \        \"brown\"         \"brown\"        \n#> [85] \"none\"          \"unknown\"
-  \      \"brown\"\n```\n\nWith the `map_` functions you either get the type of vector
-  that you\nasked for, or you get an error. Sometimes this reveals surprising\ninformation
+  \      \"brown\"\n```\n\nThe `map_` functions always either give you the type of
+  vector that you\nasked for, or they throw an error. Sometimes this reveals surprising\ninformation
   about your data:\n\n``` r\nmap_dbl(sw_people, ~ .x[[\"mass\"]])\n#> Error: Can't
-  coerce element 1 from a character to a double\n```\n\nWhy not?\n\n``` r\nsw_people[[1]][[\"mass\"]]\n#>
-  [1] \"77\"\n```\n\n`mass` has been recorded as a string\\! So lets use `map_chr()`
-  to get\nit.\n\n``` r\nmap_chr(sw_people, ~ .x[[\"mass\"]])\n#>  [1] \"77\"      \"75\"
-  \     \"32\"      \"136\"     \"49\"      \"120\"     \"75\"     \n#>  [8] \"32\"
-  \     \"84\"      \"77\"      \"84\"      \"unknown\" \"112\"     \"80\"     \n#>
-  [15] \"74\"      \"1,358\"   \"77\"      \"110\"     \"17\"      \"75\"      \"78.2\"
-  \  \n#> [22] \"140\"     \"113\"     \"79\"      \"79\"      \"83\"      \"unknown\"
-  \"unknown\"\n#> [29] \"20\"      \"68\"      \"89\"      \"90\"      \"unknown\"
-  \"66\"      \"82\"     \n#> [36] \"unknown\" \"unknown\" \"unknown\" \"40\"      \"unknown\"
-  \"unknown\" \"80\"     \n#> [43] \"unknown\" \"55\"      \"45\"      \"unknown\"
-  \"65\"      \"84\"      \"82\"     \n#> [50] \"87\"      \"unknown\" \"50\"      \"unknown\"
-  \"unknown\" \"80\"      \"unknown\"\n#> [57] \"85\"      \"unknown\" \"unknown\"
-  \"80\"      \"56.2\"    \"50\"      \"unknown\"\n#> [64] \"80\"      \"unknown\"
-  \"79\"      \"55\"      \"102\"     \"88\"      \"unknown\"\n#> [71] \"unknown\"
-  \"15\"      \"unknown\" \"48\"      \"unknown\" \"57\"      \"159\"    \n#> [78]
-  \"136\"     \"79\"      \"48\"      \"80\"      \"unknown\" \"unknown\" \"unknown\"\n#>
-  [85] \"unknown\" \"unknown\" \"45\"\n```\n\nWe probably want that as a number so
-  we can use `read::parse_number()`\ntell it that in this variable missing values
-  are recorded as “unknown”:\n\n``` r\nsw_people %>% \n  map_chr(~ .x[[\"mass\"]])
-  %>% \n  readr::parse_number(na = \"unknown\")\n#>  [1]   77.0   75.0   32.0  136.0
-  \  49.0  120.0   75.0   32.0   84.0   77.0\n#> [11]   84.0     NA  112.0   80.0
-  \  74.0 1358.0   77.0  110.0   17.0   75.0\n#> [21]   78.2  140.0  113.0   79.0
-  \  79.0   83.0     NA     NA   20.0   68.0\n#> [31]   89.0   90.0     NA   66.0
-  \  82.0     NA     NA     NA   40.0     NA\n#> [41]     NA   80.0     NA   55.0
-  \  45.0     NA   65.0   84.0   82.0   87.0\n#> [51]     NA   50.0     NA     NA
-  \  80.0     NA   85.0     NA     NA   80.0\n#> [61]   56.2   50.0     NA   80.0
-  \    NA   79.0   55.0  102.0   88.0     NA\n#> [71]     NA   15.0     NA   48.0
-  \    NA   57.0  159.0  136.0   79.0   48.0\n#> [81]   80.0     NA     NA     NA
-  \    NA     NA   45.0\n```\n\n## Short cuts\n\nSo far we’ve used a formula recipe
-  for the second argument of `map()`.\nBut it can be lots of other things. For example,
-  it can also be a string\nor integer:\n\n  - `map(.x, .f = \"some_name\")` is equivalent
-  to `map(.x, ~\n    .x[[\"some_name\"]])`\n  - `map(.x, .f = some_name)` is equivalent
-  to `map(.x, ~\n    .x[[some_name]])`\n\nThat lets us simplify some exressions:\n\n```
-  r\n# BEFORE: \n# map_chr(sw_people, ~ .x[[\"mass\"]])\n\n# AFTER\nmap_chr(sw_people,
+  coerce element 1 from a character to a double\n```\n\nWhy not? Whenever you get
+  an error, a good strategy is to go back to the\nbasics and look at a single value:\n\n```
+  r\nluke[[\"mass\"]]\n#> [1] \"77\"\n```\n\n`mass` has been recorded as a string\\!
+  So lets use `map_chr()` to get\nit.\n\n``` r\nmap_chr(sw_people, ~ .x[[\"mass\"]])\n#>
+  \ [1] \"77\"      \"75\"      \"32\"      \"136\"     \"49\"      \"120\"     \"75\"
+  \    \n#>  [8] \"32\"      \"84\"      \"77\"      \"84\"      \"unknown\" \"112\"
+  \    \"80\"     \n#> [15] \"74\"      \"1,358\"   \"77\"      \"110\"     \"17\"
+  \     \"75\"      \"78.2\"   \n#> [22] \"140\"     \"113\"     \"79\"      \"79\"
+  \     \"83\"      \"unknown\" \"unknown\"\n#> [29] \"20\"      \"68\"      \"89\"
+  \     \"90\"      \"unknown\" \"66\"      \"82\"     \n#> [36] \"unknown\" \"unknown\"
+  \"unknown\" \"40\"      \"unknown\" \"unknown\" \"80\"     \n#> [43] \"unknown\"
+  \"55\"      \"45\"      \"unknown\" \"65\"      \"84\"      \"82\"     \n#> [50]
+  \"87\"      \"unknown\" \"50\"      \"unknown\" \"unknown\" \"80\"      \"unknown\"\n#>
+  [57] \"85\"      \"unknown\" \"unknown\" \"80\"      \"56.2\"    \"50\"      \"unknown\"\n#>
+  [64] \"80\"      \"unknown\" \"79\"      \"55\"      \"102\"     \"88\"      \"unknown\"\n#>
+  [71] \"unknown\" \"15\"      \"unknown\" \"48\"      \"unknown\" \"57\"      \"159\"
+  \   \n#> [78] \"136\"     \"79\"      \"48\"      \"80\"      \"unknown\" \"unknown\"
+  \"unknown\"\n#> [85] \"unknown\" \"unknown\" \"45\"\n```\n\nWe probably want that
+  as a number so we can use `read::parse_number()`,\nand tell it that in this variable
+  missing values are recorded as\n“unknown”:\n\n``` r\nsw_people %>% \n  map_chr(~
+  .x[[\"mass\"]]) %>% \n  readr::parse_number(na = \"unknown\")\n#>  [1]   77.0   75.0
+  \  32.0  136.0   49.0  120.0   75.0   32.0   84.0   77.0\n#> [11]   84.0     NA
+  \ 112.0   80.0   74.0 1358.0   77.0  110.0   17.0   75.0\n#> [21]   78.2  140.0
+  \ 113.0   79.0   79.0   83.0     NA     NA   20.0   68.0\n#> [31]   89.0   90.0
+  \    NA   66.0   82.0     NA     NA     NA   40.0     NA\n#> [41]     NA   80.0
+  \    NA   55.0   45.0     NA   65.0   84.0   82.0   87.0\n#> [51]     NA   50.0
+  \    NA     NA   80.0     NA   85.0     NA     NA   80.0\n#> [61]   56.2   50.0
+  \    NA   80.0     NA   79.0   55.0  102.0   88.0     NA\n#> [71]     NA   15.0
+  \    NA   48.0     NA   57.0  159.0  136.0   79.0   48.0\n#> [81]   80.0     NA
+  \    NA     NA     NA     NA   45.0\n```\n\n## Shortcuts\n\nSo far we’ve used a
+  formula recipe for the second argument of `map()`.\nBut it can be lots of other
+  things. For example, it can also be a string\nor integer:\n\n  - `map(.x, .f = \"some_name\")`
+  is equivalent to `map(.x, ~\n    .x[[\"some_name\"]])`\n  - `map(.x, .f = some_name)`
+  is equivalent to `map(.x, ~\n    .x[[some_name]])`\n\nThat lets us simplify some
+  exressions:\n\n``` r\n# BEFORE: \n# map_chr(sw_people, ~ .x[[\"mass\"]])\n\n# AFTER\nmap_chr(sw_people,
   \"mass\")\n#>  [1] \"77\"      \"75\"      \"32\"      \"136\"     \"49\"      \"120\"
   \    \"75\"     \n#>  [8] \"32\"      \"84\"      \"77\"      \"84\"      \"unknown\"
   \"112\"     \"80\"     \n#> [15] \"74\"      \"1,358\"   \"77\"      \"110\"     \"17\"
