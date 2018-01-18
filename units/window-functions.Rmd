@@ -1,5 +1,5 @@
 ---
-unit_title: "Transformation functions"
+unit_title: "Window functions"
 theme: wrangle
 needs: [manip-basics]
 ---

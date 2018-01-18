@@ -19,12 +19,12 @@
   - eda-1d
   - data-structure-basics
   - missing-values
+  - vector-summary-functions
   - eda-2d
   - parse-basics
   - relational-basics
   - vis-scales
   - function-basics
-  - window-functions
 
 - units: # week 4
   - spatial-basics
@@ -46,11 +46,11 @@
 
 - units: # week 6
   - list-cols
-  - window-functions-2
   - filter-joins
   - model-vis
   - separate-unite
   - parse-details
+  - window-functions
 
 - units: # week 7
   - factor-basics

@@ -122,6 +122,12 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="vector-summary-functions.html">Vector and summary functions</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
   <td colspan="3"><a class="explore" href="eda-2d.html">Exploratory data analysis (2D)</a></td>
   <td colspan="5"></td>
 </tr>
@@ -148,12 +154,6 @@ title: Theme index
   <td colspan="2"></td>
   <td colspan="3"><a class="program" href="function-basics.html">Function basics</a></td>
   <td colspan="3"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="window-functions.html">Window functions</a></td>
-  <td colspan="4"></td>
 </tr>
 </tbody>
 <tbody>
@@ -251,12 +251,6 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="window-functions-2.html">Transformation functions</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
   <td colspan="3"><a class="wrangle" href="filter-joins.html">Semi- and anti-joins</a></td>
   <td colspan="4"></td>
 </tr>
@@ -276,6 +270,12 @@ title: Theme index
 <td></td>
   <td colspan="1"></td>
   <td colspan="3"><a class="wrangle" href="parse-details.html">Parsing details</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="window-functions.html">Window functions</a></td>
   <td colspan="4"></td>
 </tr>
 </tbody>
