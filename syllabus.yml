@@ -24,7 +24,7 @@
   - parse-basics
   - relational-basics
   - vis-scales
-  - iteration-basics
+  - purrr-map
 
 - units: # week 4
   - spatial-basics

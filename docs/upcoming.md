@@ -152,7 +152,7 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="2"></td>
-  <td colspan="3"><a class="program" href="function-basics.html">Function basics</a></td>
+  <td colspan="3"><a class="program" href="purrr-map.html">Iteration basics</a></td>
   <td colspan="3"></td>
 </tr>
 </tbody>
@@ -195,6 +195,12 @@ title: Theme index
 <td></td>
   <td colspan="5"></td>
   <td colspan="3"><a class="workflow" href="workflow-rmarkdown.html">RMarkdown</a></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="2"></td>
+  <td colspan="3"><a class="program" href="function-basics.html">Function basics</a></td>
+  <td colspan="3"></td>
 </tr>
 </tbody>
 <tbody>
