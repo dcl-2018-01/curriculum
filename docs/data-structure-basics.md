@@ -6,7 +6,7 @@ title: Data structure basics
 
 # Data structure basics <small class='program'>[program]</small>
 <small>(Builds on: [Manipulation basics](manip-basics.md))</small>  
-<small>(Leads to: [Date/time basics](datetime-basics.md), [Function basics](function-basics.md), [Lists](lists.md), [Parsing basics](parse-basics.md), [Atomic vectors](vectors.md))</small>
+<small>(Leads to: [Date/time basics](datetime-basics.md), [Function basics](function-basics.md), [Iteration basics](iteration-basics.md), [Lists](lists.md), [Parsing basics](parse-basics.md), [Atomic vectors](vectors.md))</small>
 
 
 It’s helpful to know a little bit about how data structures are
@@ -49,7 +49,33 @@ double <- c(1.5, 2.8, pi)
 character <- c("this", "is", "a character", "vector")
 ```
 
-## Augmented
+### Subsetting
+
+Use `[[` extract a single value out of a vector:
+
+``` r
+x <- c(5.1, 4.2, 5.3, 1.4)
+x[[2]]
+#> [1] 4.2
+```
+
+Use `[` to extract multiple values:
+
+``` r
+# Keep selected locations
+x[c(1, 3)]
+#> [1] 5.1 5.3
+
+# Drop selected locations
+x[-1]
+#> [1] 4.2 5.3 1.4
+
+# Select locations where the condition is true
+x[x > 5]
+#> [1] 5.1 5.3
+```
+
+### Augmented vectors
 
 Augmented vectors are atomic vectors with additional metadata. There are
 four important augmented vectors:
@@ -74,9 +100,10 @@ course.
 ## Data frames/tibbles
 
 Related vectors (both atomic and augmented) are collected together into
-data frames or tibbles. Later you’ll learn the precise different between
-data.frames and tibbles, but don’t worry about it for now. There are two
-ways to create tibbles by hand:
+data frames or tibbles. You can think of them as a list of vectors,
+where every vector has the same length. Later you’ll learn the precise
+different between data.frames and tibbles, but don’t worry about it for
+now. There are two ways to create tibbles by hand:
 
 1.  From individual vectors, each representing a column:
     
@@ -175,9 +202,13 @@ map_chr(diamonds, type_sum)
 
 ### Variables
 
-You can extract a variable out of a tibble by using `$`:
+You can extract a variable out of a tibble by using `[[` or `$`:
 
 ``` r
+mtcars[["mpg"]]
+#>  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2
+#> [15] 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4
+#> [29] 15.8 19.7 15.0 21.4
 mtcars$mpg
 #>  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2
 #> [15] 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4
@@ -186,4 +217,14 @@ mtcars$mpg
 
 For this reason, when we want to be precise about which tibble a
 variable comes from, we use the syntax `dataset$variablename`.
+
+The dplyr equivalent, which can more easily be used in a pipe, is
+`pull()`:
+
+``` r
+mtcars %>% pull(mpg)
+#>  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2
+#> [15] 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4
+#> [29] 15.8 19.7 15.0 21.4
+```
 
