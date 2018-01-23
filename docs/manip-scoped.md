@@ -9,11 +9,11 @@ title: Scoped verbs
 <small>(Leads to: [Programming with dplyr](manip-programming.md))</small>
 
 
-## Scoped verbs
+## Introduction
 
-In the latest version of dplyr each of the single table verbs comes in
-three additional forms with the suffixes `_if`, `_at`, and `_all`. These
-**scoped** variants allow you to affect multiple variables at once:
+Each of the single table verbs comes in three additional forms with the
+suffixes `_if`, `_at`, and `_all`. These **scoped** variants allow you
+to work with multiple variables with a single call:
 
   - `_if` allows you to pick variables based on a predicate function
     like `is.numeric()` or `is.character()`.
@@ -50,12 +50,12 @@ summarise_all(df, funs(mean))
 #> # A tibble: 1 x 3
 #>       x     y     z
 #>   <dbl> <dbl> <dbl>
-#> 1 0.500 0.492 0.500
+#> 1 0.513 0.508 0.490
 summarise_all(df, funs(min, max))
 #> # A tibble: 1 x 6
-#>    x_min   y_min    z_min x_max y_max z_max
-#>    <dbl>   <dbl>    <dbl> <dbl> <dbl> <dbl>
-#> 1 0.0105 0.00958 0.000404 0.999 0.990 0.999
+#>      x_min   y_min  z_min x_max y_max z_max
+#>      <dbl>   <dbl>  <dbl> <dbl> <dbl> <dbl>
+#> 1 0.000193 0.00809 0.0183 0.985 0.975 0.999
 ```
 
 You might wonder why we need `funs()`. You don’t actually need it if you
@@ -74,7 +74,7 @@ summarise_at(df, vars(-z), funs(mean))
 #> # A tibble: 1 x 2
 #>       x     y
 #>   <dbl> <dbl>
-#> 1 0.500 0.492
+#> 1 0.513 0.508
 ```
 
 You can put anything inside `vars()` that you can put inside a call to
@@ -130,22 +130,22 @@ summarise_at(df, vars(x),    funs(mean))
 #> # A tibble: 1 x 1
 #>       x
 #>   <dbl>
-#> 1 0.500
+#> 1 0.513
 summarise_at(df, vars(x),    funs(min, max))
 #> # A tibble: 1 x 2
-#>      min   max
-#>    <dbl> <dbl>
-#> 1 0.0105 0.999
+#>        min   max
+#>      <dbl> <dbl>
+#> 1 0.000193 0.985
 summarise_at(df, vars(x, y), funs(mean))
 #> # A tibble: 1 x 2
 #>       x     y
 #>   <dbl> <dbl>
-#> 1 0.500 0.492
+#> 1 0.513 0.508
 summarise_at(df, vars(x, y), funs(min, max))
 #> # A tibble: 1 x 4
-#>    x_min   y_min x_max y_max
-#>    <dbl>   <dbl> <dbl> <dbl>
-#> 1 0.0105 0.00958 0.999 0.990
+#>      x_min   y_min x_max y_max
+#>      <dbl>   <dbl> <dbl> <dbl>
+#> 1 0.000193 0.00809 0.985 0.975
 ```
 
 ### `summarise_if()`
@@ -182,13 +182,13 @@ their summarise equivalents.
 ``` r
 mutate_all(df, funs(log10))
 #> # A tibble: 100 x 3
-#>        x      y       z
-#>    <dbl>  <dbl>   <dbl>
-#> 1 -0.211 -0.119 -0.577 
-#> 2 -1.92  -1.32  -0.0797
-#> 3 -0.470 -0.344 -0.0921
-#> 4 -1.20  -0.386 -0.213 
-#> 5 -0.426 -0.478 -0.266 
+#>         x       y        z
+#>     <dbl>   <dbl>    <dbl>
+#> 1 -0.127  -0.0905 -0.0190 
+#> 2 -0.152  -0.110  -0.00927
+#> 3 -0.325  -0.0512 -0.307  
+#> 4 -0.291  -0.356  -1.40   
+#> 5 -0.0783 -0.0613 -0.00983
 #> # ... with 95 more rows
 ```
 
@@ -201,13 +201,13 @@ half <- function(x) x / 2
 
 mutate_all(df, funs(half, double))
 #> # A tibble: 100 x 9
-#>        x      y     z  x_half y_half z_half x_double y_double z_double
-#>    <dbl>  <dbl> <dbl>   <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
-#> 1 0.615  0.760  0.265 0.308   0.380   0.132   1.23     1.52      0.530
-#> 2 0.0119 0.0483 0.832 0.00597 0.0242  0.416   0.0239   0.0967    1.66 
-#> 3 0.339  0.453  0.809 0.169   0.227   0.404   0.677    0.907     1.62 
-#> 4 0.0638 0.411  0.613 0.0319  0.206   0.306   0.128    0.822     1.23 
-#> 5 0.375  0.333  0.542 0.187   0.166   0.271   0.750    0.665     1.08 
+#>       x     y      z x_half y_half z_half x_double y_double z_double
+#>   <dbl> <dbl>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
+#> 1 0.747 0.812 0.957   0.374  0.406 0.479     1.49     1.62    1.91  
+#> 2 0.705 0.776 0.979   0.353  0.388 0.489     1.41     1.55    1.96  
+#> 3 0.473 0.889 0.494   0.237  0.444 0.247     0.947    1.78    0.987 
+#> 4 0.512 0.441 0.0397  0.256  0.220 0.0199    1.02     0.881   0.0794
+#> 5 0.835 0.868 0.978   0.418  0.434 0.489     1.67     1.74    1.96  
 #> # ... with 95 more rows
 ```
 
@@ -218,13 +218,13 @@ apply multiple transformations and don’t want the original values:
 ``` r
 transmute_all(df, funs(half, double))
 #> # A tibble: 100 x 6
-#>    x_half y_half z_half x_double y_double z_double
-#>     <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
-#> 1 0.308   0.380   0.132   1.23     1.52      0.530
-#> 2 0.00597 0.0242  0.416   0.0239   0.0967    1.66 
-#> 3 0.169   0.227   0.404   0.677    0.907     1.62 
-#> 4 0.0319  0.206   0.306   0.128    0.822     1.23 
-#> 5 0.187   0.166   0.271   0.750    0.665     1.08 
+#>   x_half y_half z_half x_double y_double z_double
+#>    <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
+#> 1  0.374  0.406 0.479     1.49     1.62    1.91  
+#> 2  0.353  0.388 0.489     1.41     1.55    1.96  
+#> 3  0.237  0.444 0.247     0.947    1.78    0.987 
+#> 4  0.256  0.220 0.0199    1.02     0.881   0.0794
+#> 5  0.418  0.434 0.489     1.67     1.74    1.96  
 #> # ... with 95 more rows
 ```
 

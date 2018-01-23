@@ -10,9 +10,9 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 library(tidyverse)
 ```
 
-## Scoped verbs
+## Introduction
 
-In the latest version of dplyr each of the single table verbs comes in three additional forms with the suffixes `_if`, `_at`, and `_all`. These __scoped__ variants allow you to affect multiple variables at once:
+Each of the single table verbs comes in three additional forms with the suffixes `_if`, `_at`, and `_all`. These __scoped__ variants allow you to work with multiple variables with a single call:
 
 * `_if` allows you to pick variables based on a predicate function like
   `is.numeric()` or `is.character()`.

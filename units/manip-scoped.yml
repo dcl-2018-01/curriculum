@@ -5,31 +5,31 @@ needs:
 - manip-basics
 readings: ~
 updated: ~
-desc: "\n## Scoped verbs\n\nIn the latest version of dplyr each of the single table
-  verbs comes in\nthree additional forms with the suffixes `_if`, `_at`, and `_all`.
-  These\n**scoped** variants allow you to affect multiple variables at once:\n\n  -
-  `_if` allows you to pick variables based on a predicate function\n    like `is.numeric()`
-  or `is.character()`.\n\n  - `_at` allows you to pick variables using the same syntax
-  as\n    `select()`.\n\n  - `_all` operates on all variables.\n\nThese variants are
-  coupled with `funs()` and `vars()` helpers that let\nyou describe which functions
-  you want to apply to which variables.\n\nI’ll illustrate the three variants in detail
-  for `summarise()`, then\nshow how you can use the same ideas with `mutate()` and
-  `filter()`.\nYou’ll need the scoped variants of the other verbs less frequently,\nbut
-  when you do, it should be straightforward to generalise what you’ve\nlearn here.\n\n##
-  Summarise\n\n### `summarise_all()`\n\nThe simplest variant to understand is `summarise_all()`.
-  The first\nargument is a tibble. The second argument is one of more functions\nwrapped
+desc: "\n## Introduction\n\nEach of the single table verbs comes in three additional
+  forms with the\nsuffixes `_if`, `_at`, and `_all`. These **scoped** variants allow
+  you\nto work with multiple variables with a single call:\n\n  - `_if` allows you
+  to pick variables based on a predicate function\n    like `is.numeric()` or `is.character()`.\n\n
+  \ - `_at` allows you to pick variables using the same syntax as\n    `select()`.\n\n
+  \ - `_all` operates on all variables.\n\nThese variants are coupled with `funs()`
+  and `vars()` helpers that let\nyou describe which functions you want to apply to
+  which variables.\n\nI’ll illustrate the three variants in detail for `summarise()`,
+  then\nshow how you can use the same ideas with `mutate()` and `filter()`.\nYou’ll
+  need the scoped variants of the other verbs less frequently,\nbut when you do, it
+  should be straightforward to generalise what you’ve\nlearn here.\n\n## Summarise\n\n###
+  `summarise_all()`\n\nThe simplest variant to understand is `summarise_all()`. The
+  first\nargument is a tibble. The second argument is one of more functions\nwrapped
   inside of the `funs()` helper:\n\n``` r\ndf <- tibble(\n  x = runif(100),\n  y =
   runif(100),\n  z = runif(100)\n)\nsummarise_all(df, funs(mean))\n#> # A tibble:
-  1 x 3\n#>       x     y     z\n#>   <dbl> <dbl> <dbl>\n#> 1 0.500 0.492 0.500\nsummarise_all(df,
-  funs(min, max))\n#> # A tibble: 1 x 6\n#>    x_min   y_min    z_min x_max y_max
-  z_max\n#>    <dbl>   <dbl>    <dbl> <dbl> <dbl> <dbl>\n#> 1 0.0105 0.00958 0.000404
-  0.999 0.990 0.999\n```\n\nYou might wonder why we need `funs()`. You don’t actually
+  1 x 3\n#>       x     y     z\n#>   <dbl> <dbl> <dbl>\n#> 1 0.513 0.508 0.490\nsummarise_all(df,
+  funs(min, max))\n#> # A tibble: 1 x 6\n#>      x_min   y_min  z_min x_max y_max
+  z_max\n#>      <dbl>   <dbl>  <dbl> <dbl> <dbl> <dbl>\n#> 1 0.000193 0.00809 0.0183
+  0.985 0.975 0.999\n```\n\nYou might wonder why we need `funs()`. You don’t actually
   need it if you\nhave a single function, but it’s necessary for technical reasons
   for\nmore than one function, and always using it makes your code more\nconsistent.\n\n###
   `summarise_at()`\n\n`summarise_at()` allows you to pick columns to summarise in
   the same way\nas `select()`. There is one small difference: you need to wrap the\ncomplete
   selection with the `vars()` helper:\n\n``` r\nsummarise_at(df, vars(-z), funs(mean))\n#>
-  # A tibble: 1 x 2\n#>       x     y\n#>   <dbl> <dbl>\n#> 1 0.500 0.492\n```\n\nYou
+  # A tibble: 1 x 2\n#>       x     y\n#>   <dbl> <dbl>\n#> 1 0.513 0.508\n```\n\nYou
   can put anything inside `vars()` that you can put inside a call to\n`select()`:\n\n```
   r\nlibrary(nycflights13)\nsummarise_at(flights, vars(contains(\"delay\")), funs(mean),
   na.rm = TRUE)\n#> # A tibble: 1 x 2\n#>   dep_delay arr_delay\n#>       <dbl>     <dbl>\n#>
@@ -49,12 +49,12 @@ desc: "\n## Scoped verbs\n\nIn the latest version of dplyr each of the single ta
   want to force names when they’re not otherwise needed.\n\n``` r\n# Note the use
   of extra spaces to make the 3rd argument line\n# up - this makes it easy to scan
   the scoe and see what's different\nsummarise_at(df, vars(x),    funs(mean))\n#>
-  # A tibble: 1 x 1\n#>       x\n#>   <dbl>\n#> 1 0.500\nsummarise_at(df, vars(x),
-  \   funs(min, max))\n#> # A tibble: 1 x 2\n#>      min   max\n#>    <dbl> <dbl>\n#>
-  1 0.0105 0.999\nsummarise_at(df, vars(x, y), funs(mean))\n#> # A tibble: 1 x 2\n#>
-  \      x     y\n#>   <dbl> <dbl>\n#> 1 0.500 0.492\nsummarise_at(df, vars(x, y),
-  funs(min, max))\n#> # A tibble: 1 x 4\n#>    x_min   y_min x_max y_max\n#>    <dbl>
-  \  <dbl> <dbl> <dbl>\n#> 1 0.0105 0.00958 0.999 0.990\n```\n\n### `summarise_if()`\n\n`summarise_if()`
+  # A tibble: 1 x 1\n#>       x\n#>   <dbl>\n#> 1 0.513\nsummarise_at(df, vars(x),
+  \   funs(min, max))\n#> # A tibble: 1 x 2\n#>        min   max\n#>      <dbl> <dbl>\n#>
+  1 0.000193 0.985\nsummarise_at(df, vars(x, y), funs(mean))\n#> # A tibble: 1 x 2\n#>
+  \      x     y\n#>   <dbl> <dbl>\n#> 1 0.513 0.508\nsummarise_at(df, vars(x, y),
+  funs(min, max))\n#> # A tibble: 1 x 4\n#>      x_min   y_min x_max y_max\n#>      <dbl>
+  \  <dbl> <dbl> <dbl>\n#> 1 0.000193 0.00809 0.985 0.975\n```\n\n### `summarise_if()`\n\n`summarise_if()`
   allows you to pick variables to summarise based on some\nproperty of the column,
   specified by a **predicate** function. A\npredicate function is a function that
   takes a whole column and returns\neither a single `TRUE` or a single `FALSE`. Commonly
@@ -67,24 +67,24 @@ desc: "\n## Scoped verbs\n\nIn the latest version of dplyr each of the single ta
   \ 196   NaN        NaN  \n#> 5 Clawdite  168    55.0      NaN  \n#> # ... with 33
   more rows\n```\n\n## Mutate\n\n`mutate_all()`, `mutate_if()` and `mutate_at()` work
   in a similar way to\ntheir summarise equivalents.\n\n``` r\nmutate_all(df, funs(log10))\n#>
-  # A tibble: 100 x 3\n#>        x      y       z\n#>    <dbl>  <dbl>   <dbl>\n#>
-  1 -0.211 -0.119 -0.577 \n#> 2 -1.92  -1.32  -0.0797\n#> 3 -0.470 -0.344 -0.0921\n#>
-  4 -1.20  -0.386 -0.213 \n#> 5 -0.426 -0.478 -0.266 \n#> # ... with 95 more rows\n```\n\nIf
-  you need a transformation that is not already a function, it’s\neasiest to create
-  your own function:\n\n``` r\ndouble <- function(x) x * 2\nhalf <- function(x) x
-  / 2\n\nmutate_all(df, funs(half, double))\n#> # A tibble: 100 x 9\n#>        x      y
-  \    z  x_half y_half z_half x_double y_double z_double\n#>    <dbl>  <dbl> <dbl>
-  \  <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>\n#> 1 0.615  0.760  0.265 0.308
-  \  0.380   0.132   1.23     1.52      0.530\n#> 2 0.0119 0.0483 0.832 0.00597 0.0242
-  \ 0.416   0.0239   0.0967    1.66 \n#> 3 0.339  0.453  0.809 0.169   0.227   0.404
-  \  0.677    0.907     1.62 \n#> 4 0.0638 0.411  0.613 0.0319  0.206   0.306   0.128
-  \   0.822     1.23 \n#> 5 0.375  0.333  0.542 0.187   0.166   0.271   0.750    0.665
-  \    1.08 \n#> # ... with 95 more rows\n```\n\nThe default names are generated in
-  the same way as `summarise()`. That\nmeans that you may want to use a `transmute()`
+  # A tibble: 100 x 3\n#>         x       y        z\n#>     <dbl>   <dbl>    <dbl>\n#>
+  1 -0.127  -0.0905 -0.0190 \n#> 2 -0.152  -0.110  -0.00927\n#> 3 -0.325  -0.0512
+  -0.307  \n#> 4 -0.291  -0.356  -1.40   \n#> 5 -0.0783 -0.0613 -0.00983\n#> # ...
+  with 95 more rows\n```\n\nIf you need a transformation that is not already a function,
+  it’s\neasiest to create your own function:\n\n``` r\ndouble <- function(x) x * 2\nhalf
+  <- function(x) x / 2\n\nmutate_all(df, funs(half, double))\n#> # A tibble: 100 x
+  9\n#>       x     y      z x_half y_half z_half x_double y_double z_double\n#>   <dbl>
+  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>\n#> 1 0.747 0.812 0.957
+  \  0.374  0.406 0.479     1.49     1.62    1.91  \n#> 2 0.705 0.776 0.979   0.353
+  \ 0.388 0.489     1.41     1.55    1.96  \n#> 3 0.473 0.889 0.494   0.237  0.444
+  0.247     0.947    1.78    0.987 \n#> 4 0.512 0.441 0.0397  0.256  0.220 0.0199
+  \   1.02     0.881   0.0794\n#> 5 0.835 0.868 0.978   0.418  0.434 0.489     1.67
+  \    1.74    1.96  \n#> # ... with 95 more rows\n```\n\nThe default names are generated
+  in the same way as `summarise()`. That\nmeans that you may want to use a `transmute()`
   variant if you want to\napply multiple transformations and don’t want the original
   values:\n\n``` r\ntransmute_all(df, funs(half, double))\n#> # A tibble: 100 x 6\n#>
-  \   x_half y_half z_half x_double y_double z_double\n#>     <dbl>  <dbl>  <dbl>
-  \   <dbl>    <dbl>    <dbl>\n#> 1 0.308   0.380   0.132   1.23     1.52      0.530\n#>
-  2 0.00597 0.0242  0.416   0.0239   0.0967    1.66 \n#> 3 0.169   0.227   0.404   0.677
-  \   0.907     1.62 \n#> 4 0.0319  0.206   0.306   0.128    0.822     1.23 \n#> 5
-  0.187   0.166   0.271   0.750    0.665     1.08 \n#> # ... with 95 more rows\n```\n"
+  \  x_half y_half z_half x_double y_double z_double\n#>    <dbl>  <dbl>  <dbl>    <dbl>
+  \   <dbl>    <dbl>\n#> 1  0.374  0.406 0.479     1.49     1.62    1.91  \n#> 2  0.353
+  \ 0.388 0.489     1.41     1.55    1.96  \n#> 3  0.237  0.444 0.247     0.947    1.78
+  \   0.987 \n#> 4  0.256  0.220 0.0199    1.02     0.881   0.0794\n#> 5  0.418  0.434
+  0.489     1.67     1.74    1.96  \n#> # ... with 95 more rows\n```\n"
