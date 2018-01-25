@@ -52,7 +52,7 @@
   - list-cols
   - separate-unite
   - window-functions
-  - iteration
+  - purrr-map-variants
   - spatial-vis
   - vis-annotation
   - workflow-rmarkdown

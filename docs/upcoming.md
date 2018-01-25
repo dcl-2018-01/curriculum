@@ -278,9 +278,9 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
-  <td colspan="2"></td>
-  <td colspan="3"><a class="program" href="iteration.html">Iteration</a></td>
-  <td colspan="3"></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="purrr-map-variants.html">Map variants</a></td>
+  <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
