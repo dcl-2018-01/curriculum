@@ -105,31 +105,9 @@ title: Theme index
 <tbody>
 <tr>
 <td id='week-3'>3</td>
-  <td colspan="3"><a class="explore" href="eda-1d.html">Exploratory data analysis (1D)</a></td>
-  <td colspan="5"></td>
-</tr>
-<tr>
-<td></td>
   <td colspan="2"></td>
   <td colspan="3"><a class="program" href="data-structure-basics.html">Data structure basics</a></td>
   <td colspan="3"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="missing-values.html">Missing values</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="vector-summary-functions.html">Vector and summary functions</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="3"><a class="explore" href="eda-2d.html">Exploratory data analysis (2D)</a></td>
-  <td colspan="5"></td>
 </tr>
 <tr>
 <td></td>
@@ -151,28 +129,27 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
-  <td colspan="2"></td>
-  <td colspan="3"><a class="program" href="purrr-map.html">Iteration basics</a></td>
-  <td colspan="3"></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="spread-gather.html">Spreading and gathering</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="3"><a class="explore" href="vis-perception.html">Perception</a></td>
+  <td colspan="5"></td>
 </tr>
 </tbody>
 <tbody>
 <tr>
 <td id='week-4'>4</td>
   <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="spatial-basics.html">Spatial basics</a></td>
+  <td colspan="3"><a class="wrangle" href="datetime-basics.html">Date/time basics</a></td>
   <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
-  <td colspan="3"><a class="explore" href="spatial-vis.html">Spatial visualisation</a></td>
+  <td colspan="3"><a class="explore" href="eda-1d.html">Exploratory data analysis (1D)</a></td>
   <td colspan="5"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="spread-gather.html">Spreading and gathering</a></td>
-  <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
@@ -182,25 +159,21 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
+  <td colspan="2"></td>
+  <td colspan="3"><a class="program" href="purrr-map.html">Iteration basics</a></td>
+  <td colspan="3"></td>
+</tr>
+<tr>
+<td></td>
   <td colspan="4"></td>
-  <td colspan="3"><a class="communicate" href="vis-annotation.html">Annotations</a></td>
+  <td colspan="3"><a class="communicate" href="vis-position.html">Positioning</a></td>
   <td colspan="1"></td>
 </tr>
 <tr>
 <td></td>
-  <td colspan="3"><a class="explore" href="vis-perception.html">Perception</a></td>
-  <td colspan="5"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="5"></td>
-  <td colspan="3"><a class="workflow" href="workflow-rmarkdown.html">RMarkdown</a></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="2"></td>
-  <td colspan="3"><a class="program" href="function-basics.html">Function basics</a></td>
-  <td colspan="3"></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="missing-values.html">Missing values</a></td>
+  <td colspan="4"></td>
 </tr>
 </tbody>
 <tbody>
@@ -242,8 +215,41 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
+  <td colspan="3"><a class="explore" href="spatial-vis.html">Spatial visualisation</a></td>
+  <td colspan="5"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"></td>
+  <td colspan="3"><a class="communicate" href="vis-annotation.html">Annotations</a></td>
   <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="datetime-basics.html">Date/time basics</a></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="5"></td>
+  <td colspan="3"><a class="workflow" href="workflow-rmarkdown.html">RMarkdown</a></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="2"></td>
+  <td colspan="3"><a class="program" href="function-basics.html">Function basics</a></td>
+  <td colspan="3"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="vector-summary-functions.html">Vector and summary functions</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="3"><a class="explore" href="eda-2d.html">Exploratory data analysis (2D)</a></td>
+  <td colspan="5"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="spatial-basics.html">Spatial basics</a></td>
   <td colspan="4"></td>
 </tr>
 </tbody>
@@ -342,12 +348,6 @@ title: Theme index
 <td></td>
   <td colspan="4"></td>
   <td colspan="3"><a class="communicate" href="report-generation.html">Generating multiple reports</a></td>
-  <td colspan="1"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="4"></td>
-  <td colspan="3"><a class="communicate" href="vis-position.html">Positioning</a></td>
   <td colspan="1"></td>
 </tr>
 </tbody>

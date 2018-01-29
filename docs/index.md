@@ -102,4 +102,78 @@ title: Theme index
   <td colspan="5"></td>
 </tr>
 </tbody>
+<tbody>
+<tr>
+<td id='week-3'>3</td>
+  <td colspan="2"></td>
+  <td colspan="3"><a class="program" href="data-structure-basics.html">Data structure basics</a></td>
+  <td colspan="3"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="parse-basics.html">Parsing basics</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="relational-basics.html">Essentials of relational data</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"></td>
+  <td colspan="3"><a class="communicate" href="vis-scales.html">Scales</a></td>
+  <td colspan="1"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="spread-gather.html">Spreading and gathering</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="3"><a class="explore" href="vis-perception.html">Perception</a></td>
+  <td colspan="5"></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td id='week-4'>4</td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="datetime-basics.html">Date/time basics</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="3"><a class="explore" href="eda-1d.html">Exploratory data analysis (1D)</a></td>
+  <td colspan="5"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="string-basics.html">String basics</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="2"></td>
+  <td colspan="3"><a class="program" href="purrr-map.html">Iteration basics</a></td>
+  <td colspan="3"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"></td>
+  <td colspan="3"><a class="communicate" href="vis-position.html">Positioning</a></td>
+  <td colspan="1"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="missing-values.html">Missing values</a></td>
+  <td colspan="4"></td>
+</tr>
+</tbody>
 </table>
