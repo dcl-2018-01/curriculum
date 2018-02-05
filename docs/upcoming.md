@@ -180,7 +180,7 @@ title: Theme index
 <tr>
 <td id='week-5'>5</td>
   <td colspan="2"></td>
-  <td colspan="3"><a class="program" href="lists.html">Lists</a></td>
+  <td colspan="3"><a class="program" href="function-basics.html">Function basics</a></td>
   <td colspan="3"></td>
 </tr>
 <tr>
@@ -192,65 +192,26 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="2"></td>
-  <td colspan="3"><a class="program" href="iteration.html">Iteration</a></td>
+  <td colspan="3"><a class="program" href="lists.html">Lists</a></td>
   <td colspan="3"></td>
 </tr>
 <tr>
 <td></td>
-  <td colspan="4"></td>
-  <td colspan="3"><a class="communicate" href="vis-themes.html">ggplot2 themes</a></td>
   <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="manip-scoped.html">Scoped verbs</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="factor-basics.html">Factor basics</a></td>
+  <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
   <td colspan="3"></td>
   <td colspan="3"><a class="model" href="model-basics.html">Model intuition</a></td>
   <td colspan="2"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="regexps.html">Regular expressions</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="3"><a class="explore" href="spatial-vis.html">Spatial visualisation</a></td>
-  <td colspan="5"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="4"></td>
-  <td colspan="3"><a class="communicate" href="vis-annotation.html">Annotations</a></td>
-  <td colspan="1"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="5"></td>
-  <td colspan="3"><a class="workflow" href="workflow-rmarkdown.html">RMarkdown</a></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="2"></td>
-  <td colspan="3"><a class="program" href="function-basics.html">Function basics</a></td>
-  <td colspan="3"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="vector-summary-functions.html">Vector and summary functions</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="3"><a class="explore" href="eda-2d.html">Exploratory data analysis (2D)</a></td>
-  <td colspan="5"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="spatial-basics.html">Spatial basics</a></td>
-  <td colspan="4"></td>
 </tr>
 </tbody>
 <tbody>
@@ -290,16 +251,61 @@ title: Theme index
   <td colspan="3"><a class="wrangle" href="window-functions.html">Window functions</a></td>
   <td colspan="4"></td>
 </tr>
-</tbody>
-<tbody>
 <tr>
-<td id='week-7'>7</td>
+<td></td>
+  <td colspan="2"></td>
+  <td colspan="3"><a class="program" href="iteration.html">Iteration</a></td>
+  <td colspan="3"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"></td>
+  <td colspan="3"><a class="communicate" href="vis-themes.html">ggplot2 themes</a></td>
   <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="factor-basics.html">Factor basics</a></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="regexps.html">Regular expressions</a></td>
   <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
+  <td colspan="3"><a class="explore" href="spatial-vis.html">Spatial visualisation</a></td>
+  <td colspan="5"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"></td>
+  <td colspan="3"><a class="communicate" href="vis-annotation.html">Annotations</a></td>
+  <td colspan="1"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="5"></td>
+  <td colspan="3"><a class="workflow" href="workflow-rmarkdown.html">RMarkdown</a></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="vector-summary-functions.html">Vector and summary functions</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="3"><a class="explore" href="eda-2d.html">Exploratory data analysis (2D)</a></td>
+  <td colspan="5"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="spatial-basics.html">Spatial basics</a></td>
+  <td colspan="4"></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td id='week-7'>7</td>
   <td colspan="3"></td>
   <td colspan="3"><a class="model" href="model-multivariate.html">Models with multiple variables</a></td>
   <td colspan="2"></td>
@@ -311,12 +317,6 @@ title: Theme index
   <td colspan="3"></td>
   <td colspan="3"><a class="model" href="model-many.html">Many models</a></td>
   <td colspan="2"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="manip-scoped.html">Scoped verbs</a></td>
-  <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
