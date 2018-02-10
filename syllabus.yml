@@ -40,25 +40,24 @@
   - model-basics
 
 - units: # week 6
-  - list-cols
-  - filter-joins
   - model-vis
-  - separate-unite
+  - regexps
+  - filter-joins
+  - eda-2d
   - parse-details
+  - vis-themes
+
+- units: # week 7
+  - model-multivariate
+  - list-cols
+  - separate-unite
   - window-functions
   - iteration
-  - vis-themes
-  - regexps
   - spatial-vis
   - vis-annotation
   - workflow-rmarkdown
   - vector-summary-functions
-  - eda-2d
   - spatial-basics
-
-- units: # week 7
-
-  - model-multivariate
 
 - units: # week 8
   - model-many
