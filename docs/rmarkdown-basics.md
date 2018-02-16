@@ -23,7 +23,7 @@ your results _and_ your process.
 
   * [Code chunks](http://r4ds.had.co.nz/r-markdown.html#code-chunks) [r4ds-27.4]
 
-  * [R Markdown Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf) [cheatsheets-rmarkdown-2.0]
+  * [R Markdown Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) [cheatsheets-rmarkdown-2.0]
 
   * [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) [cheatsheets-rmarkdown-reference]
 

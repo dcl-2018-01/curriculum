@@ -18,7 +18,7 @@ readings:
 
 - book: r4ds-1.5
 
-- book: cheatsheets-rstudio-IDE
+- book: cheatsheets-rstudio-ide
   desc: >
     You don't need to read the complete cheatsheet, but you should
     know that it exists.

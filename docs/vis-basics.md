@@ -31,7 +31,7 @@ geoms. Come back and read in detail when you actually need to use them.
 
   * [Toolbox](https://link-springer-com.stanford.idm.oclc.org/chapter/10.1007/978-3-319-24277-4_3) [ggplot2-3]
 
-  * [Data Visualization Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf) [cheatsheets-ggplot2-2.1]
+  * [Data Visualization Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) [cheatsheets-data-visualization-2.1]
 
   * [ggplot2 documentation](http://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms)
 
