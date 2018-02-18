@@ -113,7 +113,7 @@ By default, the newly created columns have the shortest names needed to uniquely
 
 ```{r}
 # Note the use of extra spaces to make the 3rd argument line
-# up - this makes it easy to scan the scoe and see what's different
+# up - this makes it easy to scan the code and see what's different
 summarise_at(df, vars(x),    funs(mean))
 summarise_at(df, vars(x),    funs(min, max))
 summarise_at(df, vars(x, y), funs(mean))

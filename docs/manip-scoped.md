@@ -9,28 +9,20 @@ title: Scoped verbs
 <small>(Leads to: [Programming with dplyr](manip-programming.md))</small>
 
 
-## Introduction
+Introduction
+------------
 
-Each of the single table verbs comes in three additional forms with the
-suffixes `_if`, `_at`, and `_all`. These **scoped** variants allow you
-to work with multiple variables with a single call:
+Each of the single table verbs comes in three additional forms with the suffixes `_if`, `_at`, and `_all`. These **scoped** variants allow you to work with multiple variables with a single call:
 
-  - `_if` allows you to pick variables based on a predicate function
-    like `is.numeric()` or `is.character()`.
+-   `_if` allows you to pick variables based on a predicate function like `is.numeric()` or `is.character()`.
 
-  - `_at` allows you to pick variables using the same syntax as
-    `select()`.
+-   `_at` allows you to pick variables using the same syntax as `select()`.
 
-  - `_all` operates on all variables.
+-   `_all` operates on all variables.
 
-These variants are coupled with `funs()` and `vars()` helpers that let
-you describe which functions you want to apply to which variables.
+These variants are coupled with `funs()` and `vars()` helpers that let you describe which functions you want to apply to which variables.
 
-The scoped verbs are useful because they can allow you to save a lot of
-typing. For example, imagine that you want to group
-`nycflights13::flights` by destination, then compute the mean the delay
-variables, the distance, and the time in the air. That’s a lot of
-typing\!
+The scoped verbs are useful because they can allow you to save a lot of typing. For example, imagine that you want to group `nycflights13::flights` by destination, then compute the mean the delay variables, the distance, and the time in the air. That's a lot of typing!
 
 ``` r
 library(nycflights13)
@@ -65,22 +57,16 @@ flights %>%
 #> # ... with 100 more rows
 ```
 
-You can imagine that this gets even more helpful as the number of
-variables increases.
+You can imagine that this gets even more helpful as the number of variables increases.
 
-I’ll illustrate the three variants in detail for `summarise()`, then
-show how you can use the same ideas with `mutate()` and `filter()`.
-You’ll need the scoped variants of the other verbs less frequently,
-but when you do, it should be straightforward to generalise what you’ve
-learn here.
+I'll illustrate the three variants in detail for `summarise()`, then show how you can use the same ideas with `mutate()` and `filter()`. You'll need the scoped variants of the other verbs less frequently, but when you do, it should be straightforward to generalise what you've learn here.
 
-## Summarise
+Summarise
+---------
 
 ### `summarise_all()`
 
-The simplest variant to understand is `summarise_all()`. The first
-argument is a tibble. The second argument is one of more functions
-wrapped inside of the `funs()` helper:
+The simplest variant to understand is `summarise_all()`. The first argument is a tibble. The second argument is one of more functions wrapped inside of the `funs()` helper:
 
 ``` r
 df <- tibble(
@@ -92,51 +78,41 @@ summarise_all(df, funs(mean))
 #> # A tibble: 1 x 3
 #>       x     y     z
 #>   <dbl> <dbl> <dbl>
-#> 1 0.465 0.488 0.483
+#> 1 0.462 0.499 0.536
 summarise_all(df, funs(min, max))
 #> # A tibble: 1 x 6
-#>      x_min   y_min    z_min x_max y_max z_max
-#>      <dbl>   <dbl>    <dbl> <dbl> <dbl> <dbl>
-#> 1 0.000340 0.00541 0.000948 0.994 0.999 0.997
+#>      x_min  y_min  z_min x_max y_max z_max
+#>      <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl>
+#> 1 0.000941 0.0258 0.0264 0.998 0.968 0.995
 ```
 
-You might wonder why we need `funs()`. You don’t actually need it if you
-have a single function, but it’s necessary for technical reasons for
-more than one function, and always using it makes your code more
-consistent.
+You might wonder why we need `funs()`. You don't actually need it if you have a single function, but it's necessary for technical reasons for more than one function, and always using it makes your code more consistent.
 
-You can also use `funs()` with custom expressions: just use a `.` as a
-pronoun to denote the “current” column:
+You can also use `funs()` with custom expressions: just use a `.` as a pronoun to denote the "current" column:
 
 ``` r
 summarise_all(df, funs(mean(., na.rm = TRUE)))
 #> # A tibble: 1 x 3
 #>       x     y     z
 #>   <dbl> <dbl> <dbl>
-#> 1 0.465 0.488 0.483
+#> 1 0.462 0.499 0.536
 ```
 
-NB: unfortunately `funs()` does not use the same syntax as purrr - you
-don’t need the `~` in front of a custom function like you do in purrr.
-This is an unfortunate oversight that is relatively hard to fix, but
-will hopefully be resolved in dplyr one day.
+NB: unfortunately `funs()` does not use the same syntax as purrr - you don't need the `~` in front of a custom function like you do in purrr. This is an unfortunate oversight that is relatively hard to fix, but will hopefully be resolved in dplyr one day.
 
 ### `summarise_at()`
 
-`summarise_at()` allows you to pick columns to summarise in the same way
-as `select()`. There is one small difference: you need to wrap the
-complete selection with the `vars()` helper:
+`summarise_at()` allows you to pick columns to summarise in the same way as `select()`. There is one small difference: you need to wrap the complete selection with the `vars()` helper:
 
 ``` r
 summarise_at(df, vars(-z), funs(mean))
 #> # A tibble: 1 x 2
 #>       x     y
 #>   <dbl> <dbl>
-#> 1 0.465 0.488
+#> 1 0.462 0.499
 ```
 
-You can put anything inside `vars()` that you can put inside a call to
-`select()`:
+You can put anything inside `vars()` that you can put inside a call to `select()`:
 
 ``` r
 library(nycflights13)
@@ -152,11 +128,9 @@ summarise_at(flights, vars(starts_with("arr")), funs(mean), na.rm = TRUE)
 #> 1     1502      6.90
 ```
 
-(Note that `na.rm = TRUE` is passed on to `mean()` in the same way as in
-`purrr::map()`.)
+(Note that `na.rm = TRUE` is passed on to `mean()` in the same way as in `purrr::map()`.)
 
-If the function doesn’t fit on one line, put each argument on a new
-line:
+If the function doesn't fit on one line, put each argument on a new line:
 
 ``` r
 flights %>%
@@ -177,43 +151,36 @@ flights %>%
 #> # ... with 100 more rows
 ```
 
-By default, the newly created columns have the shortest names needed to
-uniquely identify the output. See the examples in the documentation if
-you want to force names when they’re not otherwise needed.
+By default, the newly created columns have the shortest names needed to uniquely identify the output. See the examples in the documentation if you want to force names when they're not otherwise needed.
 
 ``` r
 # Note the use of extra spaces to make the 3rd argument line
-# up - this makes it easy to scan the scoe and see what's different
+# up - this makes it easy to scan the code and see what's different
 summarise_at(df, vars(x),    funs(mean))
 #> # A tibble: 1 x 1
 #>       x
 #>   <dbl>
-#> 1 0.465
+#> 1 0.462
 summarise_at(df, vars(x),    funs(min, max))
 #> # A tibble: 1 x 2
 #>        min   max
 #>      <dbl> <dbl>
-#> 1 0.000340 0.994
+#> 1 0.000941 0.998
 summarise_at(df, vars(x, y), funs(mean))
 #> # A tibble: 1 x 2
 #>       x     y
 #>   <dbl> <dbl>
-#> 1 0.465 0.488
+#> 1 0.462 0.499
 summarise_at(df, vars(x, y), funs(min, max))
 #> # A tibble: 1 x 4
-#>      x_min   y_min x_max y_max
-#>      <dbl>   <dbl> <dbl> <dbl>
-#> 1 0.000340 0.00541 0.994 0.999
+#>      x_min  y_min x_max y_max
+#>      <dbl>  <dbl> <dbl> <dbl>
+#> 1 0.000941 0.0258 0.998 0.968
 ```
 
 ### `summarise_if()`
 
-`summarise_if()` allows you to pick variables to summarise based on some
-property of the column, specified by a **predicate** function. A
-predicate function is a function that takes a whole column and returns
-either a single `TRUE` or a single `FALSE`. Commonly this a function
-that tells you if a variable is a specific type like `is.numeric()`,
-`is.character()`, or `is.logical()`.
+`summarise_if()` allows you to pick variables to summarise based on some property of the column, specified by a **predicate** function. A predicate function is a function that takes a whole column and returns either a single `TRUE` or a single `FALSE`. Commonly this a function that tells you if a variable is a specific type like `is.numeric()`, `is.character()`, or `is.logical()`.
 
 This makes it easier to summarise only numeric columns:
 
@@ -232,26 +199,25 @@ starwars %>%
 #> # ... with 33 more rows
 ```
 
-## Mutate
+Mutate
+------
 
-`mutate_all()`, `mutate_if()` and `mutate_at()` work in a similar way to
-their summarise equivalents.
+`mutate_all()`, `mutate_if()` and `mutate_at()` work in a similar way to their summarise equivalents.
 
 ``` r
 mutate_all(df, funs(log10))
 #> # A tibble: 100 x 3
-#>         x        y      z
-#>     <dbl>    <dbl>  <dbl>
-#> 1 -0.470  -0.00447 -0.241
-#> 2 -0.144  -0.837   -0.141
-#> 3 -0.384  -0.325   -0.229
-#> 4 -0.325  -0.831   -0.295
-#> 5 -0.0196 -0.639   -0.506
+#>        x       y       z
+#>    <dbl>   <dbl>   <dbl>
+#> 1 -0.183 -0.243  -0.250 
+#> 2 -0.380 -0.0805 -0.0945
+#> 3 -0.266 -0.0280 -1.16  
+#> 4 -0.100 -0.946  -0.0936
+#> 5 -0.565 -0.120  -0.662 
 #> # ... with 95 more rows
 ```
 
-If you need a transformation that is not already a function, it’s
-easiest to create your own function:
+If you need a transformation that is not already a function, it's easiest to create your own function:
 
 ``` r
 double <- function(x) x * 2
@@ -259,50 +225,42 @@ half <- function(x) x / 2
 
 mutate_all(df, funs(half, double))
 #> # A tibble: 100 x 9
-#>       x     y     z x_half y_half z_half x_double y_double z_double
-#>   <dbl> <dbl> <dbl>  <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
-#> 1 0.339 0.990 0.574  0.170 0.495   0.287    0.678    1.98     1.15 
-#> 2 0.718 0.145 0.723  0.359 0.0727  0.362    1.44     0.291    1.45 
-#> 3 0.413 0.474 0.590  0.207 0.237   0.295    0.826    0.947    1.18 
-#> 4 0.473 0.148 0.507  0.236 0.0739  0.254    0.945    0.295    1.01 
-#> 5 0.956 0.230 0.312  0.478 0.115   0.156    1.91     0.459    0.623
+#>       x     y      z x_half y_half z_half x_double y_double z_double
+#>   <dbl> <dbl>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
+#> 1 0.656 0.572 0.563   0.328 0.286  0.281     1.31     1.14     1.13 
+#> 2 0.417 0.831 0.804   0.208 0.415  0.402     0.834    1.66     1.61 
+#> 3 0.542 0.938 0.0691  0.271 0.469  0.0345    1.08     1.88     0.138
+#> 4 0.794 0.113 0.806   0.397 0.0567 0.403     1.59     0.227    1.61 
+#> 5 0.272 0.759 0.218   0.136 0.379  0.109     0.545    1.52     0.435
 #> # ... with 95 more rows
 ```
 
-The default names are generated in the same way as `summarise()`. That
-means that you may want to use a `transmute()` variant if you want to
-apply multiple transformations and don’t want the original values:
+The default names are generated in the same way as `summarise()`. That means that you may want to use a `transmute()` variant if you want to apply multiple transformations and don't want the original values:
 
 ``` r
 transmute_all(df, funs(half, double))
 #> # A tibble: 100 x 6
 #>   x_half y_half z_half x_double y_double z_double
 #>    <dbl>  <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
-#> 1  0.170 0.495   0.287    0.678    1.98     1.15 
-#> 2  0.359 0.0727  0.362    1.44     0.291    1.45 
-#> 3  0.207 0.237   0.295    0.826    0.947    1.18 
-#> 4  0.236 0.0739  0.254    0.945    0.295    1.01 
-#> 5  0.478 0.115   0.156    1.91     0.459    0.623
+#> 1  0.328 0.286  0.281     1.31     1.14     1.13 
+#> 2  0.208 0.415  0.402     0.834    1.66     1.61 
+#> 3  0.271 0.469  0.0345    1.08     1.88     0.138
+#> 4  0.397 0.0567 0.403     1.59     0.227    1.61 
+#> 5  0.136 0.379  0.109     0.545    1.52     0.435
 #> # ... with 95 more rows
 ```
 
-## Filter
+Filter
+------
 
-The `filter()` variants work a little differently to `summarise()` and
-`mutate()`. Like `summarise()` and `mutate()` you must choose between
-either all variables (`_all`), selecting variables by name (`_at`), or
-selecting by some property of the variable (`_if`). However, the
-`funs()` is no longer enough because you need to say whether the
-filtering functions should be combined with “and” (`&`) or “or” (`|`).
-That means that `funs()` is not enough:
+The `filter()` variants work a little differently to `summarise()` and `mutate()`. Like `summarise()` and `mutate()` you must choose between either all variables (`_all`), selecting variables by name (`_at`), or selecting by some property of the variable (`_if`). However, the `funs()` is no longer enough because you need to say whether the filtering functions should be combined with "and" (`&`) or "or" (`|`). That means that `funs()` is not enough:
 
 ``` r
 diamonds %>% filter_all(funs(. == 0))
 #> Error: `.vars_predicate` must be a call to `all_vars()` or `any_vars()`, not list
 ```
 
-You have to be explicit and say you either want the rows where the all
-of the variables equal 0:
+You have to be explicit and say you either want the rows where the all of the variables equal 0:
 
 ``` r
 diamonds %>% filter_if(is.numeric, all_vars(. == 0))
@@ -327,7 +285,7 @@ diamonds %>% filter_if(is.numeric, any_vars(. == 0))
 #> # ... with 15 more rows
 ```
 
-This is particularly useful if you’re looking for missing values:
+This is particularly useful if you're looking for missing values:
 
 ``` r
 flights %>% filter_all(any_vars(is.na(.)))
