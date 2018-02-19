@@ -267,6 +267,38 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="timespans.html">Time spans</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="vector-summary-functions.html">Vector and summary functions</a></td>
+  <td colspan="4"></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td id='week-8'>8</td>
+  <td colspan="3"></td>
+  <td colspan="3"><a class="model" href="model-many.html">Many models</a></td>
+  <td colspan="2"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="dplyr-databases.html">dplyr and databases</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="export.html">Exporting data</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
   <td colspan="3"><a class="wrangle" href="separate-unite.html">Separate and unite</a></td>
   <td colspan="4"></td>
 </tr>
@@ -308,26 +340,6 @@ title: Theme index
 <td></td>
   <td colspan="1"></td>
   <td colspan="3"><a class="wrangle" href="spatial-basics.html">Spatial basics</a></td>
-  <td colspan="4"></td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td id='week-8'>8</td>
-  <td colspan="3"></td>
-  <td colspan="3"><a class="model" href="model-many.html">Many models</a></td>
-  <td colspan="2"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="dplyr-databases.html">dplyr and databases</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="3"><a class="wrangle" href="export.html">Exporting data</a></td>
   <td colspan="4"></td>
 </tr>
 </tbody>

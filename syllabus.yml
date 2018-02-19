@@ -50,6 +50,13 @@
 - units: # week 7
   - model-multivariate
   - list-cols
+  - timespans
+  - vector-summary-functions
+
+- units: # week 8
+  - model-many
+  - dplyr-databases
+  - export
   - separate-unite
   - window-functions
   - purrr-map-variants
@@ -58,12 +65,6 @@
   - workflow-rmarkdown
   - vector-summary-functions
   - spatial-basics
-
-- units: # week 8
-  - model-many
-
-  - dplyr-databases
-  - export
 
 - units: # week 9
   - rectangling

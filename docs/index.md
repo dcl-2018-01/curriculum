@@ -251,4 +251,30 @@ title: Theme index
   <td colspan="1"></td>
 </tr>
 </tbody>
+<tbody>
+<tr>
+<td id='week-7'>7</td>
+  <td colspan="3"></td>
+  <td colspan="3"><a class="model" href="model-multivariate.html">Models with multiple variables</a></td>
+  <td colspan="2"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="2"></td>
+  <td colspan="3"><a class="program" href="list-cols.html">List columns</a></td>
+  <td colspan="3"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="timespans.html">Time spans</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="3"><a class="wrangle" href="vector-summary-functions.html">Vector and summary functions</a></td>
+  <td colspan="4"></td>
+</tr>
+</tbody>
 </table>

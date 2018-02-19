@@ -1,7 +1,7 @@
 #!/usr/local/bin/Rscript
 devtools::load_all(here::here())
 
-cur_week <- 6
+cur_week <- 7
 themes <- c("Explore", "Wrangle", "Program", "Model", "Communicate", "Workflow")
 
 message("Building units ----------------------------------")
