@@ -342,6 +342,12 @@ title: Theme index
   <td colspan="4"><a class="wrangle" href="spatial-basics.html">Spatial basics</a></td>
   <td colspan="4"></td>
 </tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="4"><a class="wrangle" href="vector-functions.html">Vector functions</a></td>
+  <td colspan="4"></td>
+</tr>
 </tbody>
 <tbody>
 <tr>

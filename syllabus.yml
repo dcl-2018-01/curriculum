@@ -65,6 +65,7 @@
   - workflow-rmarkdown
   - vector-summary-functions
   - spatial-basics
+  - vector-functions
 
 - units: # week 9
   - rectangling
