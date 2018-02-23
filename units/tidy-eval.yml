@@ -1,0 +1,72 @@
+title: Tidy evalation
+theme: program
+needs: tidy-eval
+readings: ~
+updated: ~
+desc: "\n## Introduction\n\nAt some point during the quarter, you may have noticed
+  that you were\ncopy-and-pasting the same dplyr snippets again and again. You then
+  might\nhave remembered it’s a bad idea to have more than three copies of the\nsame
+  code and tried to create a function. Unfortunately if you tried,\nyou would have
+  failed because dplyr verbs work a little differently to\nmost other R functions.
+  In this reading, you’ll learn exactly what makes\ndplyr verbs different, and a new
+  set of techniques so that you can\nprogram with them. The techniques, in total,
+  are known as tidy\nevaluation, and are used throughout the tidyverse.\n\n## Quoted
+  arguments\n\nTo understand what makes dplyr (and many other tidyverse functions)\ndifferent,
+  we need some new vocabulary. In R, we can divide function\narguments into two classes:\n\n
+  \ - **Evaluated** arguments are the default. Code in an evaluated\n    argument
+  executes the same regardless of whether or not its in a\n    function argument.\n\n
+  \ - Automatically **quoted** arguments are special; they behave\n    differently
+  depending on whether or not they’re inside a function.\n\nLet’s make this concrete
+  by talking about two important base R functions\nthat you learned about early in
+  the class: `$` and `[[`. We we use `$`\nthe variable name is automatically quoted:
+  if we try and use the name\noutside of `$` it doesn’t work:\n\n``` r\ndf <- data.frame(\n
+  \ y = 1,\n  var = 2\n)\ndf$y\n#> [1] 1\n```\n\nWhy do we say that `$` automatically
+  quotes the variable name? Well,\ntake `[[`. It evaluates its argument so you have
+  to put quotes around\nit:\n\n``` r\ndf[[\"y\"]]\n#> [1] 1\n```\n\nThe advantage
+  of `$` is concision. The advantage of `[[` is that you can\nrefer to variables in
+  the data frame indirectly:\n\n``` r\nvar <- \"y\"\ndf[[var]]\n#> [1] 1\n```\n\nIn
+  base R, there’s no consistent way to “unquote” an automatically\nquoted argument.
+  In other words, there’s no way to allow `$` to work\nindirectly:\n\n``` r\ndf$var\n#>
+  [1] 2\n```\n\nThe tidyverse, however, uses a consistent form of unquoting which
+  gives\nthe concision of automatically quoted arguments, while still allowing us\nto
+  use indirection:\n\n``` r\ndf %>% pull(y)\n#> [1] 1\n\nvar <- quo(y)\ndf %>% pull(!!var)\n#>
+  [1] 1\n```\n\nThere are two key components: `quo()` which quotes expressions in
+  a\nspecial way, and `!!` (pronounced bang-bang) that unquotes them.\n\n## Wrapping
+  quoting functions\n\nBefore we go on to discuss the underlying theory, I want to
+  briefly show\nyou how you can combine your new found knowledge of quoting\nvs. evaluating
+  arguments to write a wrapper around some duplicated\ndplyr code. Take this hypothetical
+  duplicated dplyr code:\n\n``` r\ndf %>% group_by(x1) %>% summarise(mean = mean(y1))\ndf
+  %>% group_by(x2) %>% summarise(mean = mean(y2))\ndf %>% group_by(x3) %>% summarise(mean
+  = mean(y3))\ndf %>% group_by(x4) %>% summarise(mean = mean(y4))\n```\n\nTo create
+  a function we need to perform three steps:\n\n1.  Identify what is constant and
+  what we might want to vary, and which\n    varying parts have been automatically
+  quoted.\n\n2.  Create a function template.\n\n3.  Quote and unquote the automatically
+  quoted arguments.\n\nLooking at the above code, I’d say there are three primary
+  things that\nwe might want to vary:\n\n  - The input data, which I’ll call `df`.\n
+  \ - The grouping variable, which I’ll call `group_var`\n  - The summary variable,
+  which I’ll call `summary_var`\n\n`group_var` and `summary_var` need to be automatically
+  quoted: they\nwon’t work when evaluated outside of the dplyr code.\n\nNow we can
+  create the function template using these names for our\narguments. I then copied
+  in the duplicated code, and replace the varying\nparts with the new variable names:\n\n```
+  r\ngrouped_mean <- function(df, group_var, summary_var) {\n  df %>% \n    group_by(group_var)
+  %>% \n    summarise(mean = mean(summary_var))\n}\n```\n\nThis function doesn’t work
+  (yet), but it’s useful to see the error\nmessage we get:\n\n``` r\ngrouped_mean(mtcars,
+  cyl, mpg)\n#> Error in grouped_df_impl(data, unname(vars), drop): Column `group_var`
+  is unknown\n```\n\nThe error complains that there’s no column called `group_var`
+  - that’s\nnot a surprise, because we don’t want to use the variable `group_var`\ndirectly;
+  we want to use it indirectly to refer to `cyl`. To fix this\nproblem we need to
+  perform the final step: quoting and unquoting. You\ncan think of quoting as being
+  infectious: if you want your function to\nvary an automated quoted argument, you
+  also need to quote the\ncorresponding argument. Then to refer to the variable indirectly,
+  you\nneed to unquote it.\n\n``` r\ngrouped_mean <- function(df, group_var, summary_var)
+  {\n  group_var <- enquo(group_var)\n  summary_var <- enquo(summary_var)\n  \n  df
+  %>% \n    group_by(!!group_var) %>% \n    summarise(mean = mean(!!summary_var))\n}\n```\n\nIf
+  you have eagle eyes, you’ll have spotted that I used `enquo()` here\nbut I showed
+  you `quo()` before. That’s because they have slightly\ndifferent uses: `quo()` captures
+  what you, the function writer type,\n`enquo()` captures what the user has typed:\n\n```
+  r\nfun1 <- function(x) quo(x)\nfun1(a + b)\n#> <quosure>\n#>   expr: ^x\n#>   env:
+  \ 0x7f9cf2a4f0a8\n\nfun2 <- function(x) enquo(x)\nfun2(a + b)\n#> <quosure>\n#>
+  \  expr: ^a + b\n#>   env:  0x7f9ceaefca78\n```\n\n## Theory\n\nTo finish off, watch
+  this video to quickly get an idea for the theory\nthat underlies tidy\neval.\n\n<iframe
+  width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/nERXS3ssntw\" frameborder=\"0\"
+  allow=\"autoplay; encrypted-media\" allowfullscreen>\n\n</iframe>\n"
