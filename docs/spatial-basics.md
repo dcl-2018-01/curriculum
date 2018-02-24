@@ -34,13 +34,8 @@ library(tidyverse)
 library(sf)
 
 # The counties of North Carolina
-nc <- read_sf(system.file("shape/nc.shp", package = "sf"), 
-  quiet = TRUE,  
-  stringsAsFactors = FALSE
-)
+nc <- read_sf(system.file("shape/nc.shp", package = "sf"))
 ```
-
-I recommend always setting `quiet = TRUE` and `stringsAsFactors = FALSE`.
 
 Here we're loading from a **shapefile** which is the way spatial data is most commonly stored. Despite the name a shapefile isn't just one file, but is a collection of files that have the same name, but different extensions. Typically you'll have four files:
 
@@ -81,20 +76,17 @@ head(nc)
 #> bbox:           xmin: -81.74107 ymin: 36.07282 xmax: -75.77316 ymax: 36.58965
 #> epsg (SRID):    4267
 #> proj4string:    +proj=longlat +datum=NAD27 +no_defs
-#>    AREA PERIMETER CNTY_ CNTY_ID        NAME  FIPS FIPSNO CRESS_ID BIR74
-#> 1 0.114     1.442  1825    1825        Ashe 37009  37009        5  1091
-#> 2 0.061     1.231  1827    1827   Alleghany 37005  37005        3   487
-#> 3 0.143     1.630  1828    1828       Surry 37171  37171       86  3188
-#> 4 0.070     2.968  1831    1831   Currituck 37053  37053       27   508
-#> 5 0.153     2.206  1832    1832 Northampton 37131  37131       66  1421
-#> 6 0.097     1.670  1833    1833    Hertford 37091  37091       46  1452
-#>   SID74 NWBIR74 BIR79 SID79 NWBIR79                       geometry
-#> 1     1      10  1364     0      19 MULTIPOLYGON(((-81.47275543...
-#> 2     0      10   542     3      12 MULTIPOLYGON(((-81.23989105...
-#> 3     5     208  3616     6     260 MULTIPOLYGON(((-80.45634460...
-#> 4     1     123   830     2     145 MULTIPOLYGON(((-76.00897216...
-#> 5     9    1066  1606     3    1197 MULTIPOLYGON(((-77.21766662...
-#> 6     7     954  1838     5    1237 MULTIPOLYGON(((-76.74506378...
+#> # A tibble: 6 x 15
+#>     AREA PERIMETER CNTY_ CNTY_ID NAME    FIPS  FIPSNO CRESS_ID BIR74 SID74
+#>    <dbl>     <dbl> <dbl>   <dbl> <chr>   <chr>  <dbl>    <int> <dbl> <dbl>
+#> 1 0.114       1.44  1825    1825 Ashe    37009  37009        5  1091  1.00
+#> 2 0.0610      1.23  1827    1827 Allegh… 37005  37005        3   487  0   
+#> 3 0.143       1.63  1828    1828 Surry   37171  37171       86  3188  5.00
+#> 4 0.0700      2.97  1831    1831 Currit… 37053  37053       27   508  1.00
+#> 5 0.153       2.21  1832    1832 Northa… 37131  37131       66  1421  9.00
+#> 6 0.0970      1.67  1833    1833 Hertfo… 37091  37091       46  1452  7.00
+#> # ... with 5 more variables: NWBIR74 <dbl>, BIR79 <dbl>, SID79 <dbl>,
+#> #   NWBIR79 <dbl>, geometry <sf_geometry [degree]>
 head(nz_sf)
 #> Simple feature collection with 6 features and 1 field
 #> geometry type:  POLYGON
@@ -102,13 +94,13 @@ head(nz_sf)
 #> bbox:           xmin: 166.458 ymin: -46.91705 xmax: 175.552 ymax: -36.09273
 #> epsg (SRID):    4326
 #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
-#>                         geometry                    ID
-#> 1 POLYGON((166.457992553711 -...        Anchor.Island 
-#> 2 POLYGON((174.259948730469 -...       Arapawa.Island 
-#> 3 POLYGON((166.580032348633 -...          Coal.Island 
-#> 4 POLYGON((167.579833984375 -...       Codfish.Island 
-#> 5 POLYGON((173.906433105469 -...     D'Urville.Island 
-#> 6 POLYGON((175.535934448242 -... Great.Barrier.Island
+#>                      ID                       geometry
+#> 1        Anchor.Island  POLYGON ((166.458 -45.93695...
+#> 2       Arapawa.Island  POLYGON ((174.2599 -41.2092...
+#> 3          Coal.Island  POLYGON ((166.58 -46.31315,...
+#> 4       Codfish.Island  POLYGON ((167.5798 -46.8738...
+#> 5     D'Urville.Island  POLYGON ((173.9064 -40.8492...
+#> 6 Great.Barrier.Island  POLYGON ((175.5359 -36.3915...
 ```
 
 This is an ordinary data frame, with one exception: the **geometry** column. This column contains **simple features**, a standard way of representing two dimesional geometries like points, lines, polygons, multilines, and multipolygons. Multilines and multipolygons are nededed to represent geographic phenomena like a river with multiple branches, or a state made up of multiple islands.
@@ -122,11 +114,11 @@ nc$geometry
 #> epsg (SRID):    4267
 #> proj4string:    +proj=longlat +datum=NAD27 +no_defs
 #> First 5 geometries:
-#> MULTIPOLYGON(((-81.4727554321289 36.23435592651...
-#> MULTIPOLYGON(((-81.2398910522461 36.36536407470...
-#> MULTIPOLYGON(((-80.4563446044922 36.24255752563...
-#> MULTIPOLYGON(((-76.0089721679688 36.31959533691...
-#> MULTIPOLYGON(((-77.2176666259766 36.24098205566...
+#> MULTIPOLYGON (((-81.47276 36.23436, -81.54084 3...
+#> MULTIPOLYGON (((-81.23989 36.36536, -81.24069 3...
+#> MULTIPOLYGON (((-80.45634 36.24256, -80.47639 3...
+#> MULTIPOLYGON (((-76.00897 36.3196, -76.01735 36...
+#> MULTIPOLYGON (((-77.21767 36.24098, -77.23461 3...
 ```
 
 Use `plot()` to show the geometry. You'll learn how to use ggplot2 for more complex data visualisations in the next unit.
@@ -146,9 +138,15 @@ Since an sf object is just a data frame, you can manipulate it with dplyr. The f
 nz_sf %>%
   mutate(area = as.numeric(st_area(geometry))) %>%
   filter(area > 1e10)
-#>                         geometry            ID         area
-#> 1 POLYGON((172.74333190918 -3... North.Island  113469632351
-#> 2 POLYGON((172.639053344727 -... South.Island  150444467051
+#> Simple feature collection with 2 features and 2 fields
+#> geometry type:  POLYGON
+#> dimension:      XY
+#> bbox:           xmin: 166.3961 ymin: -46.74155 xmax: 178.5629 ymax: -34.39895
+#> epsg (SRID):    4326
+#> proj4string:    +proj=longlat +datum=WGS84 +no_defs
+#>              ID         area                       geometry
+#> 1 North.Island  113469632351 POLYGON ((172.7433 -34.4421...
+#> 2 South.Island  150444467051 POLYGON ((172.6391 -40.5135...
 ```
 
 `st_area()` returns an object with units (i.e. *m*<sup>2</sup>), which is precise, but a little annoying to work with. I used `as.numeric()` to convert to a regular numeric vector.
@@ -226,14 +224,9 @@ To get the datum and other coordinate system metadata, use `st_crs()`:
 
 ``` r
 st_crs(nc)
-#> $epsg
-#> [1] 4267
-#> 
-#> $proj4string
-#> [1] "+proj=longlat +datum=NAD27 +no_defs"
-#> 
-#> attr(,"class")
-#> [1] "crs"
+#> Coordinate Reference System:
+#>   EPSG: 4267 
+#>   proj4string: "+proj=longlat +datum=NAD27 +no_defs"
 ```
 
 Here the datum is "NAD27", the [North American Datum](https://en.wikipedia.org/wiki/North_American_Datum) of 1927 (NAD27)

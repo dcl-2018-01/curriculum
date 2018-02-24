@@ -35,13 +35,8 @@ library(tidyverse)
 library(sf)
 
 # The counties of North Carolina
-nc <- read_sf(system.file("shape/nc.shp", package = "sf"), 
-  quiet = TRUE,  
-  stringsAsFactors = FALSE
-)
+nc <- read_sf(system.file("shape/nc.shp", package = "sf"))
 ```
-
-I recommend always setting `quiet = TRUE` and `stringsAsFactors = FALSE`. 
 
 Here we're loading from a __shapefile__ which is the way spatial data is most commonly stored. Despite the name a shapefile isn't just one file, but is a collection of files that have the same name, but different extensions. Typically you'll have four files:
 
