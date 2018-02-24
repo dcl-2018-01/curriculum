@@ -8,20 +8,17 @@ title: Vector functions
 <small>(Builds on: [Manipulation basics](manip-basics.md))</small>
 
 
-## Vector functions
-
-It’s often easy to create a scalar function, that is a function, that
-takes length 1 input, and produces a length one output. You can always
-turn this into a vectorised function by figuring out the appropriate
-purrr `map_` function. It’s also easy to accidentally use a vectorised
-function as if it’s a scalar function, doing making life harder for
-yourself than it needs to be. This reading illustrates each problem with
-an example.
-
 ## Letter grades
 
-For example, might write the following function that converts a numeric
-grade to a letter grade:
+It’s easy to inadvertently create a **scalar function**, i.e. a function
+that takes length 1 input and produces length 1. You can always apply a
+scalar function to a vector of values by using the appropriate purrr
+`map_` function, but you can often find a more efficient approach by
+relying on an existing vectorised function.
+
+A common way to create a scalar function is by using a if-else
+statement. For example, might write the following function that converts
+a numeric grade to a letter grade:
 
 ``` r
 grade <- function(x) {
@@ -37,7 +34,11 @@ grade <- function(x) {
     "F"
   }
 }
+```
 
+This works well when applied to single values:
+
+``` r
 grade(92)
 #> [1] "A"
 grade(76)
@@ -46,8 +47,8 @@ grade(60)
 #> [1] "D"
 ```
 
-But if you attempt to an entire column of a data frame, you have a
-problem:
+But fails if you attempt to apply it to an entire column of a data
+frame:
 
 ``` r
 df <- tibble(score = sample(100, 10, replace = TRUE))
@@ -57,28 +58,28 @@ df %>% mutate(grade = grade(score))
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1    93 A    
-#> 2    82 A    
-#> 3    86 A    
-#> 4     9 A    
-#> 5    80 A    
+#> 1    97 A    
+#> 2    43 A    
+#> 3    77 A    
+#> 4    24 A    
+#> 5    11 A    
 #> # ... with 5 more rows
 ```
 
-`if` can only work with a single element at a time. You can always work
-around this problem using one of the `map_` functions from purrr. In
-this case, `grade()` returns a character vector so we’d use `map_chr()`:
+You can always work around this problem using one of the `map_`
+functions from purrr. In this case, `grade()` returns a character vector
+so we’d use `map_chr()`:
 
 ``` r
 df %>% mutate(grade = map_chr(score, grade))
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1    93 A    
-#> 2    82 B    
-#> 3    86 B    
-#> 4     9 F    
-#> 5    80 B    
+#> 1    97 A    
+#> 2    43 F    
+#> 3    77 C    
+#> 4    24 F    
+#> 5    11 F    
 #> # ... with 5 more rows
 ```
 
@@ -111,18 +112,18 @@ df %>% mutate(grade = grade2(score))
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1    93 A    
-#> 2    82 B    
-#> 3    86 B    
-#> 4     9 F    
-#> 5    80 C    
+#> 1    97 A    
+#> 2    43 F    
+#> 3    77 C    
+#> 4    24 F    
+#> 5    11 F    
 #> # ... with 5 more rows
 ```
 
-And for this particular case, there’s an even more targetted function
-from base R: `cut()`. Its job is to divided a numeric range into named
-intervals. You give it a vector of breaks, and a vector of labels, and
-it produces a factor for you:
+For this particular case, there’s an even more targetted function from
+base R: `cut()`. Its job is to “cut” a number into labelled intervals.
+You give it a vector of breaks and a vector of labels, and it produces a
+factor for you:
 
 ``` r
 grade3 <- function(x) {
@@ -136,6 +137,9 @@ grade3(seq(0, 100, by = 10))
 #> Levels: F D C B A
 ```
 
+(Note that you supply it one less `label` than `breaks`; if this is
+confusing, try drawing a picture.)
+
 In general, there’s no easy way to find out that there’s an existing
 function that will make your life much easier. The best technique is to
 continually expand your knowledge of R by reading widely; a good place
@@ -143,9 +147,13 @@ to start are the weekly highlights on <http://rweekly.org/>.
 
 ## Matching many patterns
 
-So far when you’ve used stringr, we’ve always used a single `pattern`.
-But imagine you have a new challenge: you have a single string and you
-want see which of a possible set of patterns it matches:
+A similar problem is accidentally using a vectorised function as if it’s
+a scalar function, making life harder for yourself. I’ll illustrate the
+problem with a function that you’ll already familiar with
+`stringr::str_detect()`. So far when you’ve used stringr, we’ve always
+used a single `pattern`. But imagine you have a new challenge: you have
+a single string and you want see which of a possible set of patterns it
+matches:
 
 ``` r
 private <- tribble(
