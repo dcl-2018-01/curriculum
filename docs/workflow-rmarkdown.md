@@ -1,14 +1,14 @@
 ---
-title: RMarkdown
+title: R Markdown
 ---
 
 <!-- Generated automatically from workflow-rmarkdown.yml. Do not edit by hand -->
 
-# RMarkdown <small class='workflow'>[workflow]</small>
+# R Markdown <small class='workflow'>[workflow]</small>
 <small>(Builds on: [Setup](setup.md))</small>
 
 As you start to write more code, it's a good idea to be a little thoughtful
-about your use of RMarkdown.
+about your use of R Markdown.
 
 As well as the reading, make sure you know what each of the following
 keyboard shortcuts do:

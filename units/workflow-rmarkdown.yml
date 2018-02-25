@@ -1,10 +1,10 @@
-title: RMarkdown
+title: R Markdown
 theme: workflow
 needs: [setup]
 
 desc: |
   As you start to write more code, it's a good idea to be a little thoughtful
-  about your use of RMarkdown.
+  about your use of R Markdown.
 
   As well as the reading, make sure you know what each of the following
   keyboard shortcuts do:
