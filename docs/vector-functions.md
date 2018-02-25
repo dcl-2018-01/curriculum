@@ -8,46 +8,15 @@ title: Vector functions
 <small>(Builds on: [Manipulation basics](manip-basics.md))</small>
 
 
-<<<<<<< HEAD
 Vector functions
 ----------------
 
-It's often easy to create a **scalar function**, that is a function, that takes length one input and produces a length one output. You can always turn this into a vectored function by figuring out the appropriate purrr `map_` function. It's also easy to accidentally use a vectored function as if it's a scalar function; doing so makes life harder for yourself than it needs to be. This reading illustrates each problem with an example.
+It's often easy to create a **scalar function**, that is a function, that takes a length one input and produces a length one output. You can always apply a scalar function to a vector of values by using the appropriate purrr `map_` function, but you can often find a more efficient approach by relying on an existing vectorised function. It's also easy to accidentally use a vectored function as if it's a scalar function; doing so makes life harder for yourself than it needs to be. This reading illustrates each problem with an example.
 
 Letter grades
 -------------
-||||||| merged common ancestors
-## Vector functions
 
-It’s often easy to create a scalar function, that is a function, that
-takes length 1 input, and produces a length one output. You can always
-turn this into a vectorised function by figuring out the appropriate
-purrr `map_` function. It’s also easy to accidentally use a vectorised
-function as if it’s a scalar function, doing making life harder for
-yourself than it needs to be. This reading illustrates each problem with
-an example.
-
-## Letter grades
-=======
-## Letter grades
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
-
-<<<<<<< HEAD
-For example, you might write the following function that converts a numeric grade to a letter grade:
-||||||| merged common ancestors
-For example, might write the following function that converts a numeric
-grade to a letter grade:
-=======
-It’s easy to inadvertently create a **scalar function**, i.e. a function
-that takes length 1 input and produces length 1. You can always apply a
-scalar function to a vector of values by using the appropriate purrr
-`map_` function, but you can often find a more efficient approach by
-relying on an existing vectorised function.
-
-A common way to create a scalar function is by using a if-else
-statement. For example, might write the following function that converts
-a numeric grade to a letter grade:
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+A common way to create a scalar function is by using a if-else statement. For example, might write the following function that converts a numeric grade to a letter grade:
 
 ``` r
 grade_1 <- function(x) {
@@ -65,16 +34,10 @@ grade_1 <- function(x) {
 }
 ```
 
-<<<<<<< HEAD
-grade_1(92)
-||||||| merged common ancestors
-grade(92)
-=======
 This works well when applied to single values:
 
 ``` r
-grade(92)
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+grade_1(92)
 #> [1] "A"
 grade_1(76)
 #> [1] "C"
@@ -82,15 +45,7 @@ grade_1(60)
 #> [1] "D"
 ```
 
-<<<<<<< HEAD
-But if you attempt to an entire column of a data frame, you have a problem:
-||||||| merged common ancestors
-But if you attempt to an entire column of a data frame, you have a
-problem:
-=======
-But fails if you attempt to apply it to an entire column of a data
-frame:
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+But fails if you attempt to apply it to an entire column of a data frame:
 
 ``` r
 df <- tibble(
@@ -110,39 +65,15 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-<<<<<<< HEAD
-#> 1    62 D    
-#> 2    25 D    
-#> 3    68 D    
-#> 4    88 D    
-#> 5    47 D    
-||||||| merged common ancestors
-#> 1    93 A    
-#> 2    82 A    
-#> 3    86 A    
-#> 4     9 A    
-#> 5    80 A    
-=======
-#> 1    97 A    
-#> 2    43 A    
-#> 3    77 A    
-#> 4    24 A    
-#> 5    11 A    
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+#> 1    38 F    
+#> 2     5 F    
+#> 3     3 F    
+#> 4    18 F    
+#> 5     5 F    
 #> # ... with 5 more rows
 ```
 
-<<<<<<< HEAD
-`if` can only work with a single element at a time, so if `grade()` is given a vector it will only use the first element. You can always work around this problem by using one of the `map_` functions from purrr. In this case, `grade()` returns a character vector so we'd use `map_chr()`:
-||||||| merged common ancestors
-`if` can only work with a single element at a time. You can always work
-around this problem using one of the `map_` functions from purrr. In
-this case, `grade()` returns a character vector so we’d use `map_chr()`:
-=======
-You can always work around this problem using one of the `map_`
-functions from purrr. In this case, `grade()` returns a character vector
-so we’d use `map_chr()`:
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+`if` can only work with a single element at a time, so if `grade_1()` is given a vector it will only use the first element. You can always work around this problem by using one of the `map_` functions from purrr. In this case, `grade_1()` returns a character vector so we'd use `map_chr()`:
 
 ``` r
 df %>%
@@ -150,25 +81,11 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-<<<<<<< HEAD
-#> 1    62 D    
-#> 2    25 F    
-#> 3    68 D    
-#> 4    88 B    
-#> 5    47 F    
-||||||| merged common ancestors
-#> 1    93 A    
-#> 2    82 B    
-#> 3    86 B    
-#> 4     9 F    
-#> 5    80 B    
-=======
-#> 1    97 A    
-#> 2    43 F    
-#> 3    77 C    
-#> 4    24 F    
-#> 5    11 F    
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+#> 1    38 F    
+#> 2     5 F    
+#> 3     3 F    
+#> 4    18 F    
+#> 5     5 F    
 #> # ... with 5 more rows
 ```
 
@@ -193,41 +110,15 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-<<<<<<< HEAD
-#> 1    62 D    
-#> 2    25 F    
-#> 3    68 D    
-#> 4    88 B    
-#> 5    47 F    
-||||||| merged common ancestors
-#> 1    93 A    
-#> 2    82 B    
-#> 3    86 B    
-#> 4     9 F    
-#> 5    80 C    
-=======
-#> 1    97 A    
-#> 2    43 F    
-#> 3    77 C    
-#> 4    24 F    
-#> 5    11 F    
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+#> 1    38 F    
+#> 2     5 F    
+#> 3     3 F    
+#> 4    18 F    
+#> 5     5 F    
 #> # ... with 5 more rows
 ```
 
-<<<<<<< HEAD
-And for this particular case, there's an even more targeted function from base R: `cut()`. Its job is to divided a numeric range into named intervals. You give it a vector of breaks, and a vector of labels, and it produces a factor for you:
-||||||| merged common ancestors
-And for this particular case, there’s an even more targetted function
-from base R: `cut()`. Its job is to divided a numeric range into named
-intervals. You give it a vector of breaks, and a vector of labels, and
-it produces a factor for you:
-=======
-For this particular case, there’s an even more targetted function from
-base R: `cut()`. Its job is to “cut” a number into labelled intervals.
-You give it a vector of breaks and a vector of labels, and it produces a
-factor for you:
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+And for this particular case, there's an even more targeted function from base R: `cut()`. Its job is to divide a numeric range into named intervals. You give it a vector of breaks and a vector of labels, and it produces a factor for you. You use the `right` argument to tell it whether to include numbers on the right or left end of the range:
 
 ``` r
 grade_3 <- function(x) {
@@ -243,41 +134,14 @@ grade_3(seq(0, 100, by = 10))
 #> Levels: F D C B A
 ```
 
-<<<<<<< HEAD
-In general, there's no easy way to find out that there's an existing function that will make your life much easier. The best technique is to continually expand your knowledge of R by reading widely; a good place to start are the weekly highlights on <http://rweekly.org/>.
-||||||| merged common ancestors
-In general, there’s no easy way to find out that there’s an existing
-function that will make your life much easier. The best technique is to
-continually expand your knowledge of R by reading widely; a good place
-to start are the weekly highlights on <http://rweekly.org/>.
-=======
-(Note that you supply it one less `label` than `breaks`; if this is
-confusing, try drawing a picture.)
+(Note that you supply it one less `label` than `breaks`; if this is confusing, try drawing a picture.)
 
-In general, there’s no easy way to find out that there’s an existing
-function that will make your life much easier. The best technique is to
-continually expand your knowledge of R by reading widely; a good place
-to start are the weekly highlights on <http://rweekly.org/>.
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+In general, there's no easy way to find out that there's an existing function that will make your life much easier. The best technique is to continually expand your knowledge of R by reading widely; a good place to start are the weekly highlights on <http://rweekly.org/>.
 
 Matching many patterns
 ----------------------
 
-<<<<<<< HEAD
-So far when you've used stringr, we've always used a single `pattern`. But imagine you have a new challenge: you have a single string and you want see which of a possible set of patterns it matches:
-||||||| merged common ancestors
-So far when you’ve used stringr, we’ve always used a single `pattern`.
-But imagine you have a new challenge: you have a single string and you
-want see which of a possible set of patterns it matches:
-=======
-A similar problem is accidentally using a vectorised function as if it’s
-a scalar function, making life harder for yourself. I’ll illustrate the
-problem with a function that you’ll already familiar with
-`stringr::str_detect()`. So far when you’ve used stringr, we’ve always
-used a single `pattern`. But imagine you have a new challenge: you have
-a single string and you want see which of a possible set of patterns it
-matches:
->>>>>>> 8ee078a2481245f7e5771f84e027d04d6e276be1
+A similar problem is accidentally using a vectorised function as if it's a scalar function, making life harder for yourself. I'll illustrate the problem with a function that you'll already familiar with `stringr::str_detect()`. So far when you've used stringr, we've always used a single `pattern`. But imagine you have a new challenge: you have a single string and you want see which of a possible set of patterns it matches:
 
 ``` r
 private <- tribble(

@@ -12,13 +12,9 @@ library(tidyverse)
 
 ## Vector functions
 
-It's often easy to create a __scalar function__, that is a function, that takes length one input and produces a length one output. You can always turn this into a vectored function by figuring out the appropriate purrr `map_` function. It's also easy to accidentally use a vectored function as if it's a scalar function; doing so makes life harder for yourself than it needs to be. This reading illustrates each problem with an example.
+It's often easy to create a __scalar function__, that is a function, that takes a length one input and produces a length one output. You can always apply a scalar function to a vector of values by using the appropriate purrr `map_` function, but you can often find a more efficient approach by relying on an existing vectorised function. It's also easy to accidentally use a vectored function as if it's a scalar function; doing so makes life harder for yourself than it needs to be. This reading illustrates each problem with an example.
 
 ## Letter grades
-
-For example, you might write the following function that converts a numeric grade to a letter grade:
-
-It's easy to inadvertently create a __scalar function__, i.e. a function that takes length 1 input and produces length 1. You can always apply a scalar function to a vector of values by using the appropriate purrr `map_` function, but you can often find a more efficient approach by relying on an existing vectorised function.
 
 A common way to create a scalar function is by using a if-else statement. For example, might write the following function that converts a numeric grade to a letter grade:
 
@@ -57,9 +53,7 @@ df %>%
   mutate(grade = grade_1(score))
 ```
 
-`if` can only work with a single element at a time, so if `grade()` is given a vector it will only use the first element. You can always work around this problem by using one of the `map_` functions from purrr. In this case, `grade()` returns a character vector so we'd use `map_chr()`:
-
-You can always work around this problem using one of the `map_` functions from purrr. In this case, `grade()` returns a character vector so we'd use `map_chr()`:
+`if` can only work with a single element at a time, so if `grade_1()` is given a vector it will only use the first element. You can always work around this problem by using one of the `map_` functions from purrr. In this case, `grade_1()` returns a character vector so we'd use `map_chr()`:
 
 ```{r}
 df %>%
@@ -85,9 +79,7 @@ df %>%
   mutate(grade = grade_2(score))
 ```
 
-And for this particular case, there's an even more targeted function from base R: `cut()`. Its job is to divided a numeric range into named intervals. You give it a vector of breaks, and a vector of labels, and it produces a factor for you:
-
-For this particular case, there's an even more targetted function from base R: `cut()`. Its job is to "cut" a number into labelled intervals. You give it a vector of breaks and a vector of labels, and it produces a factor for you:
+And for this particular case, there's an even more targeted function from base R: `cut()`. Its job is to divide a numeric range into named intervals. You give it a vector of breaks and a vector of labels, and it produces a factor for you. You use the `right` argument to tell it whether to include numbers on the right or left end of the range:
 
 ```{r}
 grade_3 <- function(x) {
