@@ -11,12 +11,12 @@ title: Vector functions
 Vector functions
 ----------------
 
-It's often easy to create a **scalar function**, that is a function, that takes a length one input and produces a length one output. You can always apply a scalar function to a vector of values by using the appropriate purrr `map_` function, but you can often find a more efficient approach by relying on an existing vectorised function. It's also easy to accidentally use a vectored function as if it's a scalar function; doing so makes life harder for yourself than it needs to be. This reading illustrates each problem with an example.
+It's often easy to create a **scalar function**, that is a function, that takes a length one input and produces a length one output. You can always apply a scalar function to a vector of values by using the appropriate purrr `map_` function, but you can often find a more efficient approach by relying on an existing vectorized function. It's also easy to accidentally use a vectorized function as if it's a scalar function; doing so makes life harder for yourself than it needs to be. This reading illustrates each problem with an example.
 
 Letter grades
 -------------
 
-A common way to create a scalar function is by using a if-else statement. For example, might write the following function that converts a numeric grade to a letter grade:
+A common way to create a scalar function is by using a if-else statement. For example, you might write the following function that converts a numeric grade to a letter grade:
 
 ``` r
 grade_1 <- function(x) {
@@ -45,9 +45,10 @@ grade_1(60)
 #> [1] "D"
 ```
 
-But fails if you attempt to apply it to an entire column of a data frame:
+But it fails if you attempt to apply it to an entire column of a data frame:
 
 ``` r
+set.seed(523)
 df <- tibble(
   score = sample(100, 10, replace = TRUE)
 )
@@ -65,11 +66,11 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1     5 F    
-#> 2    86 F    
-#> 3    54 F    
-#> 4    85 F    
-#> 5    59 F    
+#> 1    17 F    
+#> 2    97 F    
+#> 3    76 F    
+#> 4    87 F    
+#> 5    51 F    
 #> # ... with 5 more rows
 ```
 
@@ -81,11 +82,11 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1     5 F    
-#> 2    86 B    
-#> 3    54 F    
-#> 4    85 B    
-#> 5    59 F    
+#> 1    17 F    
+#> 2    97 A    
+#> 3    76 C    
+#> 4    87 B    
+#> 5    51 F    
 #> # ... with 5 more rows
 ```
 
@@ -110,11 +111,11 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1     5 F    
-#> 2    86 B    
-#> 3    54 F    
-#> 4    85 B    
-#> 5    59 F    
+#> 1    17 F    
+#> 2    97 A    
+#> 3    76 C    
+#> 4    87 B    
+#> 5    51 F    
 #> # ... with 5 more rows
 ```
 
@@ -141,7 +142,7 @@ In general, there's no easy way to find out that there's an existing function th
 Matching many patterns
 ----------------------
 
-A similar problem is accidentally using a vectorised function as if it's a scalar function, making life harder for yourself. I'll illustrate the problem with a function that you'll already familiar with `stringr::str_detect()`. So far when you've used stringr, we've always used a single `pattern`. But imagine you have a new challenge: you have a single string and you want see which of a possible set of patterns it matches:
+A similar problem is accidentally using a vectorized function as if it's a scalar function, making life harder for yourself. I'll illustrate the problem with a function that you'll already familiar with `stringr::str_detect()`. So far when you've used stringr, we've always used a single `pattern`. But imagine you have a new challenge: you have a single string and you want see which of a possible set of patterns it matches:
 
 ``` r
 private <- tribble(
