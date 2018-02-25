@@ -68,5 +68,5 @@ desc: "\nVector functions\n----------------\n\nIt's often easy to create a **sca
   vectored oven `pattern`. That means you don't need `map_lgl()`!\n\n``` r\nprivate$name[str_detect(string,
   private$pattern)]\n#> [1] \"ssn\"   \"phone\"\n```\n\nIt's sometimes hard to tell
   from the documentation whether or not an argument is vectored. If reading the docs
-  doesn't help, just try it with a vector; if it works you'll have learned something
+  doesn't help, just try it with a vector; if it works, you'll have learned something
   new and saved yourself a little typing.\n"

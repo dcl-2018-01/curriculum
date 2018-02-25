@@ -170,5 +170,5 @@ private$name[str_detect(string, private$pattern)]
 #> [1] "ssn"   "phone"
 ```
 
-It's sometimes hard to tell from the documentation whether or not an argument is vectored. If reading the docs doesn't help, just try it with a vector; if it works you'll have learned something new and saved yourself a little typing.
+It's sometimes hard to tell from the documentation whether or not an argument is vectored. If reading the docs doesn't help, just try it with a vector; if it works, you'll have learned something new and saved yourself a little typing.
 
