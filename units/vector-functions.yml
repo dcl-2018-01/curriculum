@@ -24,23 +24,23 @@ desc: "\nVector functions\n----------------\n\nIt's often easy to create a **sca
   first\n#> element will be used\n#> Warning in if (x >= 70) {: the condition has
   length > 1 and only the first\n#> element will be used\n#> Warning in if (x >= 60)
   {: the condition has length > 1 and only the first\n#> element will be used\n#>
-  # A tibble: 10 x 2\n#>   score grade\n#>   <int> <chr>\n#> 1    38 F    \n#> 2     5
-  F    \n#> 3     3 F    \n#> 4    18 F    \n#> 5     5 F    \n#> # ... with 5 more
+  # A tibble: 10 x 2\n#>   score grade\n#>   <int> <chr>\n#> 1     5 F    \n#> 2    86
+  F    \n#> 3    54 F    \n#> 4    85 F    \n#> 5    59 F    \n#> # ... with 5 more
   rows\n```\n\n`if` can only work with a single element at a time, so if `grade_1()`
   is given a vector it will only use the first element. You can always work around
   this problem by using one of the `map_` functions from purrr. In this case, `grade_1()`
   returns a character vector so we'd use `map_chr()`:\n\n``` r\ndf %>%\n  mutate(grade
   = map_chr(score, grade_1))\n#> # A tibble: 10 x 2\n#>   score grade\n#>   <int>
-  <chr>\n#> 1    38 F    \n#> 2     5 F    \n#> 3     3 F    \n#> 4    18 F    \n#>
-  5     5 F    \n#> # ... with 5 more rows\n```\n\nHowever, there is often an alternative,
+  <chr>\n#> 1     5 F    \n#> 2    86 B    \n#> 3    54 F    \n#> 4    85 B    \n#>
+  5    59 F    \n#> # ... with 5 more rows\n```\n\nHowever, there is often an alternative,
   more elegant approach by relying on an existing vector function. For example, you
   can always rewrite a set of nested if-else statements to use `case_when()`:\n\n```
   r\ngrade_2 <- function(x) {\n  case_when(\n    x >= 90 ~ \"A\",\n    x >= 80 ~ \"B\",\n
   \   x >= 70 ~ \"C\",\n    x >= 60 ~ \"D\",\n    TRUE    ~ \"F\"\n  )\n}\n\ngrade_2(seq(0,
   100, by = 10))\n#>  [1] \"F\" \"F\" \"F\" \"F\" \"F\" \"F\" \"D\" \"C\" \"B\" \"A\"
   \"A\"\n\ndf %>%\n  mutate(grade = grade_2(score))\n#> # A tibble: 10 x 2\n#>   score
-  grade\n#>   <int> <chr>\n#> 1    38 F    \n#> 2     5 F    \n#> 3     3 F    \n#>
-  4    18 F    \n#> 5     5 F    \n#> # ... with 5 more rows\n```\n\nAnd for this
+  grade\n#>   <int> <chr>\n#> 1     5 F    \n#> 2    86 B    \n#> 3    54 F    \n#>
+  4    85 B    \n#> 5    59 F    \n#> # ... with 5 more rows\n```\n\nAnd for this
   particular case, there's an even more targeted function from base R: `cut()`. Its
   job is to divide a numeric range into named intervals. You give it a vector of breaks
   and a vector of labels, and it produces a factor for you. You use the `right` argument

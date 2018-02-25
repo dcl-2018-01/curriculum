@@ -65,11 +65,11 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1    38 F    
-#> 2     5 F    
-#> 3     3 F    
-#> 4    18 F    
-#> 5     5 F    
+#> 1     5 F    
+#> 2    86 F    
+#> 3    54 F    
+#> 4    85 F    
+#> 5    59 F    
 #> # ... with 5 more rows
 ```
 
@@ -81,11 +81,11 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1    38 F    
-#> 2     5 F    
-#> 3     3 F    
-#> 4    18 F    
-#> 5     5 F    
+#> 1     5 F    
+#> 2    86 B    
+#> 3    54 F    
+#> 4    85 B    
+#> 5    59 F    
 #> # ... with 5 more rows
 ```
 
@@ -110,11 +110,11 @@ df %>%
 #> # A tibble: 10 x 2
 #>   score grade
 #>   <int> <chr>
-#> 1    38 F    
-#> 2     5 F    
-#> 3     3 F    
-#> 4    18 F    
-#> 5     5 F    
+#> 1     5 F    
+#> 2    86 B    
+#> 3    54 F    
+#> 4    85 B    
+#> 5    59 F    
 #> # ... with 5 more rows
 ```
 
