@@ -6,7 +6,7 @@ title: Scoped verbs
 
 # Scoped verbs <small class='wrangle'>[wrangle]</small>
 <small>(Builds on: [Manipulation basics](manip-basics.md))</small>  
-<small>(Leads to: [Programming with dplyr](manip-programming.md))</small>
+<small>(Leads to: [Programming with dplyr](manip-programming.md), [Tidy evaluation](tidy-eval.md))</small>
 
 
 Introduction

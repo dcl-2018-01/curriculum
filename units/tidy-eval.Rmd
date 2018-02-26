@@ -1,6 +1,6 @@
 ---
-unit_title: Tidy evalation
-needs: tidy-eval
+unit_title: Tidy evaluation
+needs: [manip-scoped, function-basics]
 theme: program
 ---
 
@@ -24,7 +24,8 @@ To understand what makes dplyr (and many other tidyverse functions) different, w
 * Automatically __quoted__ arguments are special; they behave differently 
   depending on whether or not they're inside a function. You can tell if an
   argument is automatically quoted argument by running the code outside
-  of the function call: if you get a different result, it's a quoted argument.
+  of the function call: if you get a different result (like an error!), 
+  it's a quoted argument.
   
 Let's make this concrete by talking about two important base R functions that you learned about early in the class: `$` and `[[`. When we use `$` the variable name is automatically quoted; if we try and use the name outside of `$` it doesn't work.
 
@@ -52,22 +53,32 @@ var <- "y"
 df[[var]]
 ```
 
-In base R, there's no consistent way to "unquote", and hence evaluate, an automatically quoted argument. In other words, there's no way to allow `$` to work indirectly:
+Is there a way to allow `$` to work indirectly? i.e. is there some way to make this code do what we want?
 
 ```{r}
 df$var
 ```
 
-The tidyverse, however, uses a consistent form of unquoting which gives the concision of automatically quoted arguments, while still allowing us to use indirection. Take `pull()`, the dplyr equivalent to `$`:
+Unfortunately there's no way to do this with base R. 
+
+|          | Quoted             | Evaluated                 |
+|----------|--------------------|---------------------------|
+| Direct   | `df$y`             | `df[["y"]]`               |
+| Indirect | `r emo::ji("cry")` | `var <- "y"; df[[var]]`  |
+
+The tidyverse, however, supports __unquoting__ which makes it possible to evaluate arguments that would otherwise be automatically quoted. This gives the concision of automatically quoted arguments, while still allowing us to use indirection. Take `pull()`, the dplyr equivalent to `$`. If we use it naively, it works like `$`:
 
 ```{r}
 df %>% pull(y)
+```
 
+But with `quo()` and `!!` (pronounced bang-bang), which you'll learn about shortly, you can also refer to a variable indirectly:
+
+```{r}
 var <- quo(y)
 df %>% pull(!!var)
 ```
 
-There are two key components: `quo()` which quotes expressions, and `!!` (pronounced bang-bang) that unquotes them.
 Here, we're not going to focus on what they actually do, but instead learn how you apply them in practice.
 
 ## Wrapping quoting functions

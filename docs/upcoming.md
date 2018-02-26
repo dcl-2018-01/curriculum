@@ -359,7 +359,7 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="2"></td>
-  <td colspan="4"><a class="program" href="tidy-eval.html">Tidy evalation</a></td>
+  <td colspan="4"><a class="program" href="tidy-eval.html">Tidy evaluation</a></td>
   <td colspan="3"></td>
 </tr>
 <tr>

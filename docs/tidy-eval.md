@@ -1,12 +1,11 @@
 ---
-title: Tidy evalation
+title: Tidy evaluation
 ---
 
 <!-- Generated automatically from tidy-eval.yml. Do not edit by hand -->
 
-# Tidy evalation <small class='program'>[program]</small>
-<small>(Builds on: [Tidy evalation](tidy-eval.md))</small>  
-<small>(Leads to: [Tidy evalation](tidy-eval.md))</small>
+# Tidy evaluation <small class='program'>[program]</small>
+<small>(Builds on: [Scoped verbs](manip-scoped.md), [Function basics](function-basics.md))</small>
 
 
 ## Introduction
@@ -36,7 +35,7 @@ arguments into two classes:
     differently depending on whether or not they’re inside a function.
     You can tell if an argument is automatically quoted argument by
     running the code outside of the function call: if you get a
-    different result, it’s a quoted argument.
+    different result (like an error\!), it’s a quoted argument.
 
 Let’s make this concrete by talking about two important base R functions
 that you learned about early in the class: `$` and `[[`. When we use `$`
@@ -74,32 +73,43 @@ df[[var]]
 #> [1] 1
 ```
 
-In base R, there’s no consistent way to “unquote”, and hence evaluate,
-an automatically quoted argument. In other words, there’s no way to
-allow `$` to work indirectly:
+Is there a way to allow `$` to work indirectly? i.e. is there some way
+to make this code do what we want?
 
 ``` r
 df$var
 #> [1] 2
 ```
 
-The tidyverse, however, uses a consistent form of unquoting which gives
-the concision of automatically quoted arguments, while still allowing us
-to use indirection. Take `pull()`, the dplyr equivalent to `$`:
+Unfortunately there’s no way to do this with base R.
+
+|          | Quoted | Evaluated               |
+| -------- | ------ | ----------------------- |
+| Direct   | `df$y` | `df[["y"]]`             |
+| Indirect | 😢      | `var <- "y"; df[[var]]` |
+
+The tidyverse, however, supports **unquoting** which makes it possible
+to evaluate arguments that would otherwise be automatically quoted. This
+gives the concision of automatically quoted arguments, while still
+allowing us to use indirection. Take `pull()`, the dplyr equivalent to
+`$`. If we use it naively, it works like `$`:
 
 ``` r
 df %>% pull(y)
 #> [1] 1
+```
 
+But with `quo()` and `!!` (pronounced bang-bang), which you’ll learn
+about shortly, you can also refer to a variable indirectly:
+
+``` r
 var <- quo(y)
 df %>% pull(!!var)
 #> [1] 1
 ```
 
-There are two key components: `quo()` which quotes expressions, and `!!`
-(pronounced bang-bang) that unquotes them. Here, we’re not going to
-focus on what they actually do, but instead learn how you apply them in
-practice.
+Here, we’re not going to focus on what they actually do, but instead
+learn how you apply them in practice.
 
 ## Wrapping quoting functions
 
@@ -190,13 +200,13 @@ fun1 <- function(x) quo(x)
 fun1(a + b)
 #> <quosure>
 #>   expr: ^x
-#>   env:  0x7fb3332db780
+#>   env:  0x7fbc99e5a028
 
 fun2 <- function(x) enquo(x)
 fun2(a + b)
 #> <quosure>
 #>   expr: ^a + b
-#>   env:  0x7fb32ce0aa78
+#>   env:  0x7fbc94968678
 ```
 
 As a rule of thumb, use `quo()` when you’re experimenting interactively
