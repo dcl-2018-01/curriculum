@@ -71,7 +71,7 @@
   - report-generation
 
 - units: # week 10
-#  - ggplot2-exts
+  - ggplot2-exts
   - rmarkdown-formats
   - reprexes
   - learning-more
