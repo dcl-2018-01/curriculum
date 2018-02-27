@@ -287,25 +287,13 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="1"></td>
-  <td colspan="4"><a class="wrangle" href="dplyr-databases.html">dplyr and databases</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="4"><a class="wrangle" href="export.html">Exporting data</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
   <td colspan="4"><a class="wrangle" href="separate-unite.html">Separate and unite</a></td>
   <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
   <td colspan="1"></td>
-  <td colspan="4"><a class="wrangle" href="window-functions.html">Window functions</a></td>
+  <td colspan="4"><a class="wrangle" href="spatial-basics.html">Spatial basics</a></td>
   <td colspan="4"></td>
 </tr>
 <tr>
@@ -316,8 +304,9 @@ title: Theme index
 </tr>
 <tr>
 <td></td>
-  <td colspan="4"><a class="explore" href="spatial-vis.html">Spatial visualisation</a></td>
-  <td colspan="5"></td>
+  <td colspan="1"></td>
+  <td colspan="4"><a class="wrangle" href="dplyr-databases.html">dplyr and databases</a></td>
+  <td colspan="4"></td>
 </tr>
 <tr>
 <td></td>
@@ -333,18 +322,6 @@ title: Theme index
 <tr>
 <td></td>
   <td colspan="1"></td>
-  <td colspan="4"><a class="wrangle" href="vector-summary-functions.html">Vector and summary functions</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
-  <td colspan="4"><a class="wrangle" href="spatial-basics.html">Spatial basics</a></td>
-  <td colspan="4"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="1"></td>
   <td colspan="4"><a class="wrangle" href="vector-functions.html">Vector functions</a></td>
   <td colspan="4"></td>
 </tr>
@@ -353,8 +330,19 @@ title: Theme index
 <tr>
 <td id='week-9'>9</td>
   <td colspan="1"></td>
-  <td colspan="4"><a class="wrangle" href="rectangling.html">Data rectangling</a></td>
+  <td colspan="4"><a class="wrangle" href="export.html">Exporting data</a></td>
   <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="4"><a class="wrangle" href="window-functions.html">Window functions</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"><a class="explore" href="spatial-vis.html">Spatial visualisation</a></td>
+  <td colspan="5"></td>
 </tr>
 <tr>
 <td></td>

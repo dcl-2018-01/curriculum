@@ -76,8 +76,8 @@ desc: "\n## Introduction\n\nAt some point during the quarter, you may have notic
   you `quo()` before. That’s because they have slightly\ndifferent uses: `quo()` captures
   what you, the function writer types,\n`enquo()` captures what the user has typed:\n\n```
   r\nfun1 <- function(x) quo(x)\nfun1(a + b)\n#> <quosure>\n#>   expr: ^x\n#>   env:
-  \ 0x7fbc99e5a028\n\nfun2 <- function(x) enquo(x)\nfun2(a + b)\n#> <quosure>\n#>
-  \  expr: ^a + b\n#>   env:  0x7fbc94968678\n```\n\nAs a rule of thumb, use `quo()`
+  \ 0x7fbd01679110\n\nfun2 <- function(x) enquo(x)\nfun2(a + b)\n#> <quosure>\n#>
+  \  expr: ^a + b\n#>   env:  0x7fbcfcd3da78\n```\n\nAs a rule of thumb, use `quo()`
   when you’re experimenting interactively\nat the console, and `enquo()` when you’re
   creating a function.\n\n## Theory\n\nTo finish off, watch this short video to learn
   the basics of the\nunderlying\ntheory.\n\n<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/nERXS3ssntw\"
