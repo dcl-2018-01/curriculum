@@ -55,29 +55,32 @@
 
 - units: # week 8
   - model-many
-  - dplyr-databases
-  - export
   - separate-unite
-  - window-functions
+  - spatial-basics
   - purrr-map-variants
-  - spatial-vis
+  - dplyr-databases
   - vis-annotation
   - workflow-rmarkdown
-  - vector-summary-functions
-  - spatial-basics
   - vector-functions
 
 - units: # week 9
-  - rectangling
+  - export
+  - window-functions
+  - spatial-vis
   - tidy-eval
   - report-generation
 
 - units: # week 10
+  - ggplot2-exts
   - rmarkdown-formats
   - reprexes
   - learning-more
-# - analysis-workflow
 
+# Not used
+# - rectangling
 # Next
+# - analysis-workflow
+# - times
+# - factor-basics-2
 # - parse-many-files
 # - joins-debugging
