@@ -326,4 +326,35 @@ title: Theme index
   <td colspan="4"></td>
 </tr>
 </tbody>
+<tbody>
+<tr>
+<td id='week-9'>9</td>
+  <td colspan="2"></td>
+  <td colspan="4"><a class="program" href="tidy-eval.html">Tidy evaluation</a></td>
+  <td colspan="3"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"><a class="explore" href="spatial-vis.html">Spatial visualisation</a></td>
+  <td colspan="5"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="4"><a class="wrangle" href="window-functions.html">Window functions</a></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="4"></td>
+  <td colspan="4"><a class="communicate" href="report-generation.html">Generating multiple reports</a></td>
+  <td colspan="1"></td>
+</tr>
+<tr>
+<td></td>
+  <td colspan="1"></td>
+  <td colspan="4"><a class="wrangle" href="export.html">Exporting data</a></td>
+  <td colspan="4"></td>
+</tr>
+</tbody>
 </table>

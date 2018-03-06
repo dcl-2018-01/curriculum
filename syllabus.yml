@@ -64,11 +64,11 @@
   - vector-functions
 
 - units: # week 9
-  - export
-  - window-functions
-  - spatial-vis
   - tidy-eval
+  - spatial-vis
+  - window-functions
   - report-generation
+  - export
 
 - units: # week 10
   - ggplot2-exts

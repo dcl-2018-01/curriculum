@@ -200,13 +200,13 @@ fun1 <- function(x) quo(x)
 fun1(a + b)
 #> <quosure>
 #>   expr: ^x
-#>   env:  0x7fbc99e5a028
+#>   env:  0x7fbd01679110
 
 fun2 <- function(x) enquo(x)
 fun2(a + b)
 #> <quosure>
 #>   expr: ^a + b
-#>   env:  0x7fbc94968678
+#>   env:  0x7fbcfcd3da78
 ```
 
 As a rule of thumb, use `quo()` when you’re experimenting interactively
