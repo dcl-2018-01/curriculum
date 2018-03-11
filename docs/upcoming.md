@@ -361,19 +361,14 @@ title: Theme index
 <tr>
 <td id='week-10'>10</td>
   <td colspan="4"></td>
-  <td colspan="4"><a class="communicate" href="ggplot2-exts.html">ggplot2 extensions</a></td>
-  <td colspan="1"></td>
-</tr>
-<tr>
-<td></td>
-  <td colspan="4"></td>
   <td colspan="4"><a class="communicate" href="rmarkdown-formats.html">R Markdown presentations</a></td>
   <td colspan="1"></td>
 </tr>
 <tr>
 <td></td>
-  <td colspan="5"></td>
-  <td colspan="4"><a class="workflow" href="reprexes.html">Reprexes</a></td>
+  <td colspan="4"></td>
+  <td colspan="4"><a class="communicate" href="ggplot2-exts.html">ggplot2 extensions</a></td>
+  <td colspan="1"></td>
 </tr>
 <tr>
 <td></td>

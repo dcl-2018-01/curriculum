@@ -71,13 +71,13 @@
   - export
 
 - units: # week 10
-  - ggplot2-exts
   - rmarkdown-formats
-  - reprexes
+  - ggplot2-exts
   - learning-more
 
 # Not used
 # - rectangling
+# - reprexes # included in getting-help
 # Next
 # - analysis-workflow
 # - times
